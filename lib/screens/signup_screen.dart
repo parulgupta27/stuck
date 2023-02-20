@@ -14,9 +14,9 @@ class _SignupScreenState extends State<SignupScreen> {
       body: SafeArea(child: Padding(
         padding: EdgeInsets.all(10),
         child: Column(children: [
-          ElevatedButton(onPressed: (){
-            var img=AuthMethod().getUserImage();
-            print(img);
+          ElevatedButton(onPressed: ()async{
+            var img=await AuthMethod().getUserImage();
+           // print(img);
           }, child: Text("Pick Image"))
         ],),
       )),
