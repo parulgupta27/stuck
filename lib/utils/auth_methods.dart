@@ -15,7 +15,8 @@ signUpUser(String email,String password,String name,Uint8List img)async{
 var credentials=await _auth.createUserWithEmailAndPassword(email: email, password: password);
 User? user=credentials.user;
 await user!.updateDisplayName(name);
-await user.sendEmailVerification();
+if(!user.emailVerified){
+await user.sendEmailVerification();}
 var ref=await _storage.ref("profilepics").child(user.uid);
 await ref.putData(img);
 String url=await ref.getDownloadURL();
@@ -32,7 +33,7 @@ on FirebaseAuthException catch(e){
   return e.code;
 }
 catch(e){
-return "Internal Error";
+return e.toString();
 }
 }
 signInUser(String email,String password)async{

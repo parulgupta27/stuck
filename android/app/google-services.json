@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "308634285807",
+    "project_id": "stuck-6ba49",
+    "storage_bucket": "stuck-6ba49.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:308634285807:android:f85fdf2f71483f341ccd1a",
+        "android_client_info": {
+          "package_name": "com.example.stuck"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "308634285807-ojlniqv3udnl5kffmq2lr11rving5o78.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAY-AraAbzxVnDFHGnRQpUx_QaQ2Lfrhac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "308634285807-ojlniqv3udnl5kffmq2lr11rving5o78.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
