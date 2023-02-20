@@ -21,7 +21,7 @@ var ref=await _storage.ref("profilepics").child(user.uid);
 await ref.putData(img);
 String url=await ref.getDownloadURL();
 var refernece=await _firestore.collection("users").doc(user.uid);
-refernece.set({
+await refernece.set({
   "name":name,
   "id":user.uid,
   "email":email,
