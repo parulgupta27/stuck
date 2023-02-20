@@ -10,7 +10,8 @@ final _firestore=FirebaseFirestore.instance;
 final _storage=FirebaseStorage.instance;
 final _picker=ImagePicker();
 signUpUser(String email,String password,String name,Uint8List img)async{
-  if(email.length==0||password.length==0||name.length==0||img==null)return;
+  if(email.length==0||password.length==0||name.length==0||img==null)return "Enter Valid Details";
+  try{
 var credentials=await _auth.createUserWithEmailAndPassword(email: email, password: password);
 User? user=credentials.user;
 await user!.updateDisplayName(name);
@@ -25,13 +26,29 @@ refernece.set({
   "email":email,
   "profilepicUrl":url,
 });
+return "Success";
+}
+on FirebaseAuthException catch(e){
+  return e.code;
+}
+catch(e){
+return "Internal Error";
+}
 }
 signInUser(String email,String password)async{
-  if(email.length==0||password.length==0)return;
+  if(email.length==0||password.length==0)return "Enter valid Details";
+  try{
 var credentials=await _auth.signInWithEmailAndPassword(email: email, password: password);
 User? user=credentials.user;
 if(!user!.emailVerified){
   await user.sendEmailVerification();
+}
+}
+on FirebaseAuthException catch(e){
+  return e.code;
+}
+catch(e){
+return "Internal Error";
 }
 }
 getUserImage()async{
