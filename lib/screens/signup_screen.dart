@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:stuck/utils/auth_methods.dart';
 class SignupScreen extends StatefulWidget {
@@ -59,7 +58,6 @@ class _SignupScreenState extends State<SignupScreen> {
             ),
             TextField(
               controller: _emailController,
-            
             ),
             TextField(
               controller: _passwordController,
