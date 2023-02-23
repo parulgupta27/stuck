@@ -5,8 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Storage{
   final _firestore=FirebaseFirestore.instance;
   saveUserInfo({required String name,required String email,required String roll_no,required String department,required String branch,required String course,required String gender,required String relationship_status,required String year})async{
-  if(name==""||name==""||name==""||name==""||name==""||name==""||name==""||name==""||name==""){
-
+  if(name==""||email==""||roll_no==""||department==""||branch==""||course==""||gender==""||relationship_status==""||year==""){
   }
   User user=User(name: name, email: email, roll_no: roll_no, department: department, branch: branch, course: course, gender: gender, relationship_status: relationship_status, year: year);
   try{
