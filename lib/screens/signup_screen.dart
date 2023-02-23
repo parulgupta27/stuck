@@ -67,7 +67,7 @@ class _SignupScreenState extends State<SignupScreen> {
             ElevatedButton(onPressed: ()async{
               var res=await AuthMethod().signUpUser(_emailController.text, _passwordController.text, _nameController.text, image!);
            print(res);
-            }, child: Text("Sign In"),)
+            }, child: Text("Sign In"),),
           ],),
         ),
       )),
