@@ -5,12 +5,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Storage{
   final _firestore=FirebaseFirestore.instance;
   saveUserInfo({required String name,required String email,required String roll_no,required String department,required String branch,required String course,required String gender,required String relationship_status,required String year})async{
+  if(name==""||name==""||name==""||name==""||name==""||name==""||name==""||name==""||name==""){
+
+  }
   User user=User(name: name, email: email, roll_no: roll_no, department: department, branch: branch, course: course, gender: gender, relationship_status: relationship_status, year: year);
+  try{
   var ref=await _firestore.collection("Kurukshetra University").doc(department).collection(course).doc(branch).collection(year).doc(roll_no);
-  await ref.set(user.toObj()).then((value) => {
-    print("success"),
-  }).onError((error, stackTrace) => {
-    print(error),
-  });
+  
+  await ref.set(user.toObj());
+  return "Success";
+  }
+  on FirebaseException catch(e){
+    return e.code;
+  }
+  catch(e){
+ return "Internal Error";
+  }
   }
 }
