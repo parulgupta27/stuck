@@ -56,4 +56,5 @@ getUserImage()async{
   var file=await _picker.pickImage(source: ImageSource.gallery);
   return file!.readAsBytes();
 }
+
 }
