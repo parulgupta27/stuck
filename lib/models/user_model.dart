@@ -7,7 +7,7 @@ class User {
   String course;
   String year;
   String gender;
-  String relationship_status;
+  String phoneNo;
   User(
       {required this.name,
       required this.email,
@@ -16,7 +16,7 @@ class User {
       required this.branch,
       required this.course,
       required this.gender,
-      required this.relationship_status,
+      required this.phoneNo,
       required this.year});
   toObj() {
     return {
@@ -28,7 +28,7 @@ class User {
       "course": course,
       "year": year,
       "gender": gender,
-      "relationship_status": relationship_status
+      "relationship_status": phoneNo
     };
   }
 }

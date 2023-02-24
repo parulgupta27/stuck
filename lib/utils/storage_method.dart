@@ -13,7 +13,7 @@ class Storage {
       required String branch,
       required String course,
       required String gender,
-      required String relationship_status,
+      required String phoneNo,
       required String year}) async {
     if (name == "" ||
         email == "" ||
@@ -22,7 +22,7 @@ class Storage {
         branch == "" ||
         course == "" ||
         gender == "" ||
-        relationship_status == "" ||
+        phoneNo == "" ||
         year == "") {}
     User user = User(
         name: name,
@@ -32,7 +32,7 @@ class Storage {
         branch: branch,
         course: course,
         gender: gender,
-        relationship_status: relationship_status,
+        phoneNo: phoneNo,
         year: year);
     try {
       var ref = await _firestore
