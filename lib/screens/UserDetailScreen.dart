@@ -9,8 +9,7 @@ class UserDetailPage extends StatefulWidget {
 }
 
 class _UserDetailPageState extends State<UserDetailPage> {
-  List<String> Courses=[];
-  List<String> Branchs=[];
+
   String? selectedDepartment;
   String? selectedCourse;
   String? selectedBranch;
@@ -35,11 +34,9 @@ class _UserDetailPageState extends State<UserDetailPage> {
               onChanged:(val){
                 selectedCourse=null;
                 selectedBranch=null;
-                Branchs=[];
+                
                 setState(() {
                   selectedDepartment=val;
-                  Courses=departmentToCourse[selectedDepartment]!;
-
                 });
               },
             isExpanded: true,
@@ -51,8 +48,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
             decoration: InputDecoration(
               border: OutlineInputBorder(),),
             hint: Text("- Select Course -"),
-            value: selectedCourse,
-            items: Courses.map((e){
+           value: selectedCourse,
+            items: departmentToCourse[selectedDepartment]?.map((e){
               return DropdownMenuItem<String>(
                 child: Text(e),
                 value: e,
@@ -62,8 +59,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
               selectedBranch=null;
               setState(() {
                 selectedCourse=val;
-                Branchs=courseToBranch[selectedCourse]!;
-
               });
             },
             isExpanded: true,
@@ -76,7 +71,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
               border: OutlineInputBorder(),),
             hint: Text("- Select Branch -"),
             value: selectedBranch,
-            items: Branchs.map((e){
+            items: courseToBranch[selectedCourse]?.map((e){
               return DropdownMenuItem<String>(
                 child: Text(e),
                 value: e,
