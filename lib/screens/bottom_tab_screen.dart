@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stuck/main.dart';
+import 'package:stuck/screens/search_screen.dart';
 
 class BottomTabScreen extends StatefulWidget {
   const BottomTabScreen({super.key});
@@ -34,9 +35,7 @@ class _BottomTabScreenState extends State<BottomTabScreen> {
             Scaffold(
               body: Text("Hello"),
             ),
-            Scaffold(
-              body: Text("Parul"),
-            ),
+            SearchScreen(),
             Scaffold(
               body: Text("Hii"),
             ),
@@ -58,29 +57,41 @@ class _BottomTabScreenState extends State<BottomTabScreen> {
                  
                 indicator: BoxDecoration(
                     border: Border(
-                        top: BorderSide(width: 3, color: Colors.blueGrey))),
-                indicatorSize: TabBarIndicatorSize.label,
+                        top: BorderSide(width: 4, color: Colors.blueGrey))),
+               indicatorSize: TabBarIndicatorSize.label,
                 onTap: changePage,
                 tabs: [
-                  Icon(
-                    Icons.home,
-                    size: height * 0.03,
-                    color: _currentIndex == 0 ? Colors.blueGrey : Colors.black,
+                  Padding(
+                    padding:EdgeInsets.only(top: height*0.003),
+                    child: Icon(
+                      Icons.home,
+                      size: height * 0.03,
+                      color: _currentIndex == 0 ? Colors.blueGrey : Colors.black,
+                    ),
                   ),
-                  Icon(
-                    Icons.search,
-                    size: height * 0.03,
-                    color: _currentIndex == 1 ? Colors.blueGrey : Colors.black,
+                  Padding(
+                    padding:EdgeInsets.only(top: height*0.003),
+                    child: Icon(
+                      Icons.search,
+                      size: height * 0.03,
+                      color: _currentIndex == 1 ? Colors.blueGrey : Colors.black,
+                    ),
                   ),
-                  Icon(
-                    Icons.notification_add,
-                    size: height * 0.03,
-                    color: _currentIndex == 2 ? Colors.blueGrey : Colors.black,
+                  Padding(
+                    padding: EdgeInsets.only(top: height*0.003),
+                    child: Icon(
+                      Icons.notification_add,
+                      size: height * 0.03,
+                      color: _currentIndex == 2 ? Colors.blueGrey : Colors.black,
+                    ),
                   ),
-                  Icon(
-                    Icons.person,
-                    size: height * 0.03,
-                    color: _currentIndex == 3 ? Colors.blueGrey : Colors.black,
+                  Padding(
+                    padding: EdgeInsets.only(top: height*0.003),
+                    child: Icon(
+                      Icons.person,
+                      size: height * 0.03,
+                      color: _currentIndex == 3 ? Colors.blueGrey : Colors.black,
+                    ),
                   ),
                 ]),
           ),

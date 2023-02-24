@@ -53,4 +53,23 @@ class Storage {
       return "Internal Error";
     }
   }
+  getUsers(CollectionReference ref)async{
+   StreamBuilder<QuerySnapshot>(
+     stream: ref.snapshots(),
+     builder: (context, snapshot) {
+     if(snapshot.hasData){
+     return Expanded(child: ListView.builder(
+       itemCount: snapshot.data!.docs.length,
+       itemBuilder: (context,index){
+     return ListTile(
+       title: Text(snapshot.data!.docs[index].get("name")),
+     );
+     }),);
+     }
+     else{
+     return Center(child: CircularProgressIndicator(color: Colors.blueGrey),);
+     }
+   },);
+    
+  }
 }
