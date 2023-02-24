@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:stuck/screens/HomeScreen.dart';
 import 'package:stuck/screens/LoginScreen.dart';
+import 'package:stuck/screens/bottom_tab_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -24,7 +25,7 @@ final auth=FirebaseAuth.instance;
     if(user!=null)
       {
         Timer(const Duration(seconds: 5),(){
-          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) =>const HomeScreen(),));
+          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) =>const BottomTabScreen(),));
         });
       }
     else

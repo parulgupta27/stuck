@@ -2,6 +2,8 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:stuck/screens/LoginScreen.dart';
 import 'package:stuck/utils/auth_methods.dart';
+import 'package:stuck/utils/storage_method.dart';
+import '../models/user_model.dart';
 //hello 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -16,6 +18,11 @@ class _SignupScreenState extends State<SignupScreen> {
   final _passwordController=TextEditingController();
   final _nameController=TextEditingController();
   Uint8List? image;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(child: Padding(
