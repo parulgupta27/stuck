@@ -12,7 +12,8 @@ void main() async{
   await Firebase.initializeApp();
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
-    home:SplashScreen(),
+    home:UserDetailPage(),
+    //home:SplashScreen(),
   ));
 }
 

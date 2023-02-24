@@ -1,8 +1,7 @@
 import 'dart:async';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:stuck/screens/HomeScreen.dart';
+//import 'package:stuck/screens/HomeScreen.dart';
 import 'package:stuck/screens/LoginScreen.dart';
 import 'package:stuck/screens/bottom_tab_screen.dart';
 
