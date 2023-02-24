@@ -77,3 +77,6 @@ Map<String,List<String>>courseToBranch={
   "Master In Commerce":["M.Com"]
 
 };
+
+
+List<String> genter=['Male','Female','Others'];
