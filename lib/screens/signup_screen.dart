@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:stuck/screens/LoginScreen.dart';
 import 'package:stuck/utils/auth_methods.dart';
 import 'package:stuck/utils/storage_method.dart';
 import '../models/user_model.dart';
@@ -75,6 +76,9 @@ class _SignupScreenState extends State<SignupScreen> {
               var res=await AuthMethod().signUpUser(_emailController.text, _passwordController.text, _nameController.text, image!);
            print(res);
             }, child: Text("Sign In"),),
+              ElevatedButton(onPressed:(){
+                Navigator.push(context,MaterialPageRoute(builder: (context) =>LoginScreen(),));
+              }, child:Text("Login")),
           ],),
         ),
       )),

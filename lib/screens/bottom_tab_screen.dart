@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stuck/main.dart';
+import 'package:stuck/screens/HomeScreen.dart';
 import 'package:stuck/screens/search_screen.dart';
 
 class BottomTabScreen extends StatefulWidget {
@@ -32,9 +33,7 @@ class _BottomTabScreenState extends State<BottomTabScreen> {
           allowImplicitScrolling: false,
           controller: controller,
           children: [
-            Scaffold(
-              body: Text("Hello"),
-            ),
+            HomeScreen(),
             SearchScreen(),
             Scaffold(
               body: Text("Hii"),
