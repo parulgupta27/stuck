@@ -44,6 +44,8 @@ class Storage {
           .doc(roll_no);
 
       await ref.set(user.toObj());
+      var students=await _firestore.collection("students").doc(roll_no);
+      await students.set(user.toObj());
       return "Success";
     } on FirebaseException catch (e) {
       return e.code;

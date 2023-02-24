@@ -45,40 +45,45 @@ class _BottomTabScreenState extends State<BottomTabScreen> {
             ),
           ],
         )),
-        bottomNavigationBar: Container(
-          height: height * 0.07,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-              border: Border(
-                  top: BorderSide(color: Colors.grey.shade500, width: 3))),
-          child: TabBar(
-              indicator: BoxDecoration(
-                  border: Border(
-                      top: BorderSide(width: 3, color: Colors.blueGrey))),
-              indicatorSize: TabBarIndicatorSize.label,
-              onTap: changePage,
-              tabs: [
-                Icon(
-                  Icons.home,
-                  size: height * 0.03,
-                  color: _currentIndex == 0 ? Colors.blueGrey : Colors.black,
-                ),
-                Icon(
-                  Icons.search,
-                  size: height * 0.03,
-                  color: _currentIndex == 1 ? Colors.blueGrey : Colors.black,
-                ),
-                Icon(
-                  Icons.notification_add,
-                  size: height * 0.03,
-                  color: _currentIndex == 2 ? Colors.blueGrey : Colors.black,
-                ),
-                Icon(
-                  Icons.person,
-                  size: height * 0.03,
-                  color: _currentIndex == 3 ? Colors.blueGrey : Colors.black,
-                ),
-              ]),
+        bottomNavigationBar: Material(
+          elevation: 3,
+          child: Container(
+            height: height * 0.08,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 219, 242, 253),
+                border: Border(
+                    top: BorderSide(color: Color.fromARGB(255, 249, 249, 249), width: 3))),
+            child: TabBar(
+                 
+                indicator: BoxDecoration(
+                    border: Border(
+                        top: BorderSide(width: 3, color: Colors.blueGrey))),
+                indicatorSize: TabBarIndicatorSize.label,
+                onTap: changePage,
+                tabs: [
+                  Icon(
+                    Icons.home,
+                    size: height * 0.03,
+                    color: _currentIndex == 0 ? Colors.blueGrey : Colors.black,
+                  ),
+                  Icon(
+                    Icons.search,
+                    size: height * 0.03,
+                    color: _currentIndex == 1 ? Colors.blueGrey : Colors.black,
+                  ),
+                  Icon(
+                    Icons.notification_add,
+                    size: height * 0.03,
+                    color: _currentIndex == 2 ? Colors.blueGrey : Colors.black,
+                  ),
+                  Icon(
+                    Icons.person,
+                    size: height * 0.03,
+                    color: _currentIndex == 3 ? Colors.blueGrey : Colors.black,
+                  ),
+                ]),
+          ),
         ),
       ),
     );

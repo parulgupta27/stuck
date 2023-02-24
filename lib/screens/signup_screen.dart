@@ -21,7 +21,6 @@ class _SignupScreenState extends State<SignupScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-  Storage().saveUserInfo(name: "Sushant", email: "sushantrana@gmail.com", roll_no: "252002103", department: "UIET", branch: "CSE", course: "BTech", gender: "Male", relationship_status: "Single", year: '2024');
   }
   Widget build(BuildContext context) {
     return Scaffold(
