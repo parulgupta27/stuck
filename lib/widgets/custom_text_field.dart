@@ -3,11 +3,13 @@ class CustomTextField extends StatelessWidget {
   TextEditingController controller;
   IconData icon;
   String hint;
-CustomTextField(this.controller,this.hint,this.icon);
+  bool obsecure;
+CustomTextField(this.controller,this.hint,this.icon,this.obsecure);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      obscureText: obsecure,
       controller: controller,
       decoration: InputDecoration(
         prefixIcon: Icon(icon),
