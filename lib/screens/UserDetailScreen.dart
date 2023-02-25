@@ -50,15 +50,15 @@ class _UserDetailPageState extends State<UserDetailPage> {
             children: [
               SizedBox(height: 10,),
               Container(
-               child:Row(
-                 children: [
-                   SizedBox(width: 30,),
+                child:Row(
+                  children: [
+                    SizedBox(width: 30,),
                     Text(
-                     "Complete Your Profile ",
-                     style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold ),
-                   ),
-                 ],
-               ) ,
+                      "Complete Your Profile ",
+                      style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold ),
+                    ),
+                  ],
+                ) ,
               ),
               SizedBox(height: 10,),
               Center(
@@ -101,7 +101,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                               hint: Text("- Select Department -"),
                               borderRadius: BorderRadius.circular(10),
                               style:
-                                  TextStyle(fontSize: 14, color: Colors.black),
+                              TextStyle(fontSize: 14, color: Colors.black),
                               value: selectedDepartment,
                               items: department.map((e) {
                                 return DropdownMenuItem<String>(
@@ -116,7 +116,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                 setState(() {
                                   selectedDepartment = val;
                                   Courses =
-                                      departmentToCourse[selectedDepartment]!;
+                                  departmentToCourse[selectedDepartment]!;
                                 });
                               },
                               isExpanded: true,
@@ -131,7 +131,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                               hint: Text("- Select Course -"),
                               borderRadius: BorderRadius.circular(10),
                               style:
-                                  TextStyle(fontSize: 14, color: Colors.black),
+                              TextStyle(fontSize: 14, color: Colors.black),
                               value: selectedCourse,
                               items: Courses.map((e) {
                                 return DropdownMenuItem<String>(
@@ -158,7 +158,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                               hint: Text("- Select Branch -"),
                               borderRadius: BorderRadius.circular(10),
                               style:
-                                  TextStyle(fontSize: 14, color: Colors.black),
+                              TextStyle(fontSize: 14, color: Colors.black),
                               value: selectedBranch,
                               items: Branchs.map((e) {
                                 return DropdownMenuItem<String>(
@@ -196,17 +196,18 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                 ),
-                              hint: Text("- Select Graduation Yaer -"),
-                              value:selectedyear ,
+                                hint: Text("- Select Graduation Yaer -"),
+                                value:selectedyear ,
+                                borderRadius: BorderRadius.circular(20),
                                 items:graduationyear.map((e){
                                   return DropdownMenuItem(
-                                    value: e,
+                                      value: e,
                                       child:Text(e));
                                 }).toList(),
                                 onChanged:(val){
-                                setState(() {
-                                  selectedyear=val;
-                                });
+                                  setState(() {
+                                    selectedyear=val;
+                                  });
                                 }
                             ),
                           ],
