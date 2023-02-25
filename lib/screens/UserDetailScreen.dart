@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stuck/University_Department_Data/Department_List.dart';
 import 'package:stuck/utils/Utils.dart';
+import 'package:stuck/utils/storage_method.dart';
 import 'package:stuck/widgets/custom_text_field.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 class UserDetailPage extends StatefulWidget {
   const UserDetailPage({Key? key}) : super(key: key);
 
@@ -11,8 +12,11 @@ class UserDetailPage extends StatefulWidget {
 }
 
 class _UserDetailPageState extends State<UserDetailPage> {
-  List<String> Courses = [];
-  List<String> Branchs = [];
+
+  var _auth=FirebaseAuth.instance;
+  String? name;
+  String ?email;
+  String? url;
   String? selectedDepartment;
   String? selectedCourse;
   String? selectedBranch;
@@ -24,7 +28,17 @@ class _UserDetailPageState extends State<UserDetailPage> {
   final rollnoController = TextEditingController();
   final yearController=TextEditingController();
   Size screensize = Utils().getScreenSize();
-
+  String? getInfo(){
+    url=_auth.currentUser!.photoURL;
+    name=_auth.currentUser!.displayName;
+    email=_auth.currentUser!.email;
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getInfo();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +50,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
             backgroundColor: Colors.white,
             radius: 25,
             child: CircleAvatar(
-              backgroundImage: AssetImage('assets/Images/boy1.png'),
+              backgroundImage: NetworkImage(url.toString()),
               radius: 22,
             ),
           ),
@@ -112,11 +126,10 @@ class _UserDetailPageState extends State<UserDetailPage> {
                               onChanged: (val) {
                                 selectedCourse = null;
                                 selectedBranch = null;
-                                Branchs = [];
+                              
                                 setState(() {
                                   selectedDepartment = val;
-                                  Courses =
-                                  departmentToCourse[selectedDepartment]!;
+                                  
                                 });
                               },
                               isExpanded: true,
@@ -133,7 +146,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                               style:
                               TextStyle(fontSize: 14, color: Colors.black),
                               value: selectedCourse,
-                              items: Courses.map((e) {
+                              items: departmentToCourse[selectedDepartment]?.map((e) {
                                 return DropdownMenuItem<String>(
                                   child: Text(e),
                                   value: e,
@@ -143,7 +156,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                 selectedBranch = null;
                                 setState(() {
                                   selectedCourse = val;
-                                  Branchs = courseToBranch[selectedCourse]!;
+                              
                                 });
                               },
                               isExpanded: true,
@@ -160,7 +173,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                               style:
                               TextStyle(fontSize: 14, color: Colors.black),
                               value: selectedBranch,
-                              items: Branchs.map((e) {
+                              items: courseToBranch[selectedCourse]?.map((e) {
                                 return DropdownMenuItem<String>(
                                   child: Text(e),
                                   value: e,
@@ -224,7 +237,9 @@ class _UserDetailPageState extends State<UserDetailPage> {
                 height: 10,
               ),
               ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Storage().saveUserInfo(url:url.toString(),name: name.toString(), email: email.toString(), roll_no: rollnoController.text, department:selectedDepartment.toString(), branch: selectedBranch.toString(), course: selectedCourse.toString(), gender: selectgender.toString(), phoneNo: mobController.text, year: selectedyear.toString());
+                  },
                   child: Text(
                     "Continue ->",
                     style: TextStyle(fontFamily: 'Lalit', letterSpacing: 1),

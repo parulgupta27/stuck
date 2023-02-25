@@ -3,16 +3,18 @@ import 'package:stuck/main.dart';
 import 'package:stuck/providers/search_provider.dart';
 
 class SearchBar extends StatefulWidget {
-  var controller;
-  SearchBar(this.controller);
+  TextEditingController controller;
+  SearchProvider provider;
+  SearchBar(this.controller,this.provider);
 
   @override
-  State<SearchBar> createState() => _SearchBarState(this.controller);
+  State<SearchBar> createState() => _SearchBarState(this.controller,this.provider);
 }
 
 class _SearchBarState extends State<SearchBar> {
   var controller;
-  _SearchBarState(this.controller);
+  SearchProvider provider;
+  _SearchBarState(this.controller,this.provider);
   @override
   void pressed() {}
   Widget build(BuildContext context) {
@@ -22,8 +24,8 @@ class _SearchBarState extends State<SearchBar> {
     return 
 TextField(
   controller: controller,
-  onChanged: (val){
-    SearchProvider().setVal(controller.text);
+  onChanged: (value){
+    provider.setVal(value);
   },
               decoration: InputDecoration(
                 

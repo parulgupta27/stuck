@@ -6,7 +6,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Storage {
   final _firestore = FirebaseFirestore.instance;
   saveUserInfo(
-      {required String name,
+      {required String url,
+      required String name,
       required String email,
       required String roll_no,
       required String department,
@@ -16,6 +17,10 @@ class Storage {
       required String phoneNo,
       required String year}) async {
     if (name == "" ||
+        name == "null" ||
+        email == "null" ||
+        phoneNo == "" ||
+        roll_no == "" ||
         email == "" ||
         roll_no == "" ||
         department == "" ||
@@ -25,6 +30,7 @@ class Storage {
         phoneNo == "" ||
         year == "") {}
     User user = User(
+        url: url,
         name: name,
         email: email,
         roll_no: roll_no,
@@ -44,7 +50,7 @@ class Storage {
           .doc(roll_no);
 
       await ref.set(user.toObj());
-      var students=await _firestore.collection("students").doc(roll_no);
+      var students = await _firestore.collection("students").doc(roll_no);
       await students.set(user.toObj());
       return "Success";
     } on FirebaseException catch (e) {
@@ -53,23 +59,27 @@ class Storage {
       return "Internal Error";
     }
   }
-  getUsers(CollectionReference ref)async{
-   StreamBuilder<QuerySnapshot>(
-     stream: ref.snapshots(),
-     builder: (context, snapshot) {
-     if(snapshot.hasData){
-     return Expanded(child: ListView.builder(
-       itemCount: snapshot.data!.docs.length,
-       itemBuilder: (context,index){
-     return ListTile(
-       title: Text(snapshot.data!.docs[index].get("name")),
-     );
-     }),);
-     }
-     else{
-     return Center(child: CircularProgressIndicator(color: Colors.blueGrey),);
-     }
-   },);
-    
+
+  getUsers(CollectionReference ref) async {
+    StreamBuilder<QuerySnapshot>(
+      stream: ref.snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Expanded(
+            child: ListView.builder(
+                itemCount: snapshot.data!.docs.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(snapshot.data!.docs[index].get("name")),
+                  );
+                }),
+          );
+        } else {
+          return Center(
+            child: CircularProgressIndicator(color: Colors.blueGrey),
+          );
+        }
+      },
+    );
   }
 }
