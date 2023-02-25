@@ -18,6 +18,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
   String? selectedBranch;
 
   String? selectgender;
+  String? selectedyear;
 
   final mobController = TextEditingController();
   final rollnoController = TextEditingController();
@@ -27,22 +28,39 @@ class _UserDetailPageState extends State<UserDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
-        title: Text("User Details "),
+        title: Text(""),
+        actions: [
+          CircleAvatar(
+            backgroundColor: Colors.white,
+            radius: 25,
+            child: CircleAvatar(
+              backgroundImage: AssetImage('assets/Images/boy1.png'),
+              radius: 22,
+            ),
+          ),
+          SizedBox(width: 10,),
+        ],
       ),
+
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Container(
-                  child: Text(
-                    "Complete Your Profile Now",
-                    style: TextStyle(fontSize: 25, fontFamily: 'Lalit'),
-                  ),
-                ),
+              SizedBox(height: 10,),
+              Container(
+               child:Row(
+                 children: [
+                   SizedBox(width: 30,),
+                    Text(
+                     "Complete Your Profile ",
+                     style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold ),
+                   ),
+                 ],
+               ) ,
               ),
+              SizedBox(height: 10,),
               Center(
                 child: Container(
                   decoration: BoxDecoration(
@@ -174,14 +192,28 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                 }),
                             SizedBox(height: 10,),
 
-                            SizedBox(child:
-                            CustomTextField(yearController," Enter Graduation Year", Icons.calendar_today,false),
-                            height: 50,),
+                            DropdownButtonFormField(
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                ),
+                              hint: Text("- Select Graduation Yaer -"),
+                              value:selectedyear ,
+                                items:graduationyear.map((e){
+                                  return DropdownMenuItem(
+                                    value: e,
+                                      child:Text(e));
+                                }).toList(),
+                                onChanged:(val){
+                                setState(() {
+                                  selectedyear=val;
+                                });
+                                }
+                            ),
                           ],
                         ),
                       ),
                       SizedBox(
-                        height: 30,
+                        height: 5,
                       ),
                     ],
                   ),

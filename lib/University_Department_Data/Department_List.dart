@@ -80,3 +80,5 @@ Map<String,List<String>>courseToBranch={
 
 
 List<String> genter=['Male','Female','Others'];
+
+List<String> graduationyear=['2023','2024','2025','2026','2027','2028','2029','2030'];
