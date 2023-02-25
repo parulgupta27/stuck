@@ -1,4 +1,5 @@
 class User {
+  String bio;
   String url;
   String name;
   String email;
@@ -10,7 +11,8 @@ class User {
   String gender;
   String phoneNo;
   User(
-      {required this.url,
+      {required this.bio,
+        required this.url,
         required this.name,
       required this.email,
       required this.roll_no,
@@ -31,7 +33,8 @@ class User {
       "url":url,
       "year": year,
       "gender": gender,
-      "relationship_status": phoneNo
+      "phoneNo": phoneNo,
+      "bio":bio
     };
   }
 }

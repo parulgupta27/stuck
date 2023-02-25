@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stuck/main.dart';
+import 'package:stuck/models/user_model.dart';
 import 'package:stuck/providers/search_provider.dart';
+import 'package:stuck/screens/user_profile.dart';
 import 'package:stuck/utils/storage_method.dart';
 import 'package:stuck/widgets/search_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -45,11 +47,7 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             StreamBuilder<QuerySnapshot>(
               stream: _firestore
-                  .collection("Kurukshetra University")
-                  .doc("UIET")
-                  .collection("BTech")
-                  .doc("CSE")
-                  .collection("2024")
+                  .collection("students")
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
@@ -63,10 +61,9 @@ class _SearchScreenState extends State<SearchScreen> {
                                 .toString()
                                 .toLowerCase()
                                 .contains(value.val.toString().toLowerCase())) {
-                              return UserCard(
-                                  snapshot.data!.docs[index].get("url"),
-                                  snapshot.data!.docs[index].get("name"),
-                                  snapshot.data!.docs[index].get("department"));
+                                
+                                  User user=User(url: snapshot.data!.docs[index].get("url"), name:snapshot.data!.docs[index].get("name"), email: snapshot.data!.docs[index].get("email"), roll_no: snapshot.data!.docs[index].get("roll_no"), department: snapshot.data!.docs[index].get("department"), branch:snapshot.data!.docs[index].get("branch"), course: snapshot.data!.docs[index].get("course"), gender: snapshot.data!.docs[index].get("gender"), phoneNo: snapshot.data!.docs[index].get("phoneNo"), year:snapshot.data!.docs[index].get("year"),bio: snapshot.data!.docs[index].get("bio").toString());  
+                              return UserCard(user);
                             }
                             else{
                               return SizedBox(height: 0,);

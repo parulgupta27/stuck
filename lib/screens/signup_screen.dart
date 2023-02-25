@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:stuck/screens/LoginScreen.dart';
+import 'package:stuck/screens/UserDetailScreen.dart';
 import 'package:stuck/utils/Utils.dart';
 import 'package:stuck/utils/auth_methods.dart';
 import 'package:stuck/utils/storage_method.dart';
@@ -16,6 +17,7 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   @override
+  bool _isLoading=false;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _nameController = TextEditingController();
@@ -37,13 +39,17 @@ class _SignupScreenState extends State<SignupScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 20,),
+                SizedBox(height: 80,),
                 Stack(
                   children: [
+                    image==null?
                     CircleAvatar(
                       backgroundColor: Colors.grey,
                       radius: 40,
                       backgroundImage: AssetImage('assets/Images/boy1.png'),
+                    ):CircleAvatar(
+                      radius: 40,
+                      backgroundImage: MemoryImage(image!),
                     ),
                     Positioned(
                       top: 45,
@@ -57,7 +63,12 @@ class _SignupScreenState extends State<SignupScreen> {
                       top:37,
                         left:42,
                         child: IconButton(
-                            onPressed: () {},
+                            onPressed: () async{
+                              image=await AuthMethod().getUserImage();
+                              setState(() {
+                                
+                              });
+                            },
                             icon: Icon(Icons.camera_alt_outlined,color: Colors.grey,size: 17,),),),
                   ],
                 ),
@@ -100,7 +111,26 @@ class _SignupScreenState extends State<SignupScreen> {
                         SizedBox(
                         width: screensize.width*0.7,
                             height: 40,
-                            child: ElevatedButton(onPressed: (){}, child:const Text("Sign Up"),)),
+                            child: ElevatedButton(onPressed: ()async{
+                              if(_emailController.text.contains("@kuk.ac.in")){
+                                _isLoading=true;
+                                setState(() {
+                                  
+                                });
+                              String res=await AuthMethod().signUpUser(_emailController.text, _passwordController.text,_nameController.text, image!);
+                              print(res);
+                              if(res=="Success"){
+                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>UserDetailPage()));
+                              }
+                              _isLoading=false;
+                              setState(() {
+                                
+                              });
+                              }
+                              else{
+                                
+                              }
+                            }, child:_isLoading? CircularProgressIndicator(color: Colors.white,): Text("Sign Up"),)),
                       ],
                     ),
                   ),
