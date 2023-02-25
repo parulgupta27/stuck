@@ -93,6 +93,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                         child: Column(
                           children: [
                             SizedBox(
+                              
                               child: CustomTextField(rollnoController, "Enter Roll No",
                                   Icons.supervised_user_circle, false),
                               height: 50,
