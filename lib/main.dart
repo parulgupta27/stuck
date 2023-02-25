@@ -17,8 +17,9 @@ void main() async{
   ChangeNotifierProvider(create: (_) =>SearchProvider(),
   child:MaterialApp(
     debugShowCheckedModeBanner: false,
-    home:UserDetailPage(),
+    //home:UserDetailPage(),
     //home:SplashScreen(),
+    home: UserDetailPage(),
   )));
 }
 
