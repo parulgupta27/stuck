@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:stuck/utils/Utils.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -11,57 +12,78 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    Size screensize=Utils().getScreenSize();
     return 
        Scaffold(
-        body: SafeArea(
-            child: Padding(
-              child: Column(children: [
-                SizedBox(height: 10,),
-                StreamBuilder(
-                  stream: FirebaseFirestore.instance.collection("posts").snapshots(),
-                  builder: (context,snapshot){
-                    if(snapshot.hasError){
-                      return Center(child: Text("Some Error Occured"),);
-                    }
-                    if(snapshot.hasData){
-                  return Expanded(
-                    child: ListView.builder(
-                      itemCount: snapshot.data?.docs.length,
-                      itemBuilder: (context,index){
-                    return Column(
-                      children: [
-                        ListTile(
-                         leading:CircleAvatar(
-                           child: CircleAvatar(
-                             backgroundImage: NetworkImage(snapshot.data?.docs[index].get('profile_url',),),
-                             radius: 18,
-                           ),
-                           backgroundColor: Colors.grey,
-                           radius: 21,
-                         ),
-                          title: Text(snapshot.data?.docs[index].get('name')),
-                          subtitle: Text(snapshot.data?.docs[index]['department']),
-                          trailing: PopupMenuButton(itemBuilder: (context) =>
-                            [
+        body: Column(children: [
+          StreamBuilder(
+            stream: FirebaseFirestore.instance.collection("posts").snapshots(),
+            builder: (context,snapshot){
+            return Expanded(
+              child: ListView.builder(
+                itemCount: snapshot.data!.docs.length,
+                itemBuilder: (context,index){
+              return Column(
+                children: [
+                  SizedBox(
+                    child: ListTile(
+                     leading:CircleAvatar(
+                       child: CircleAvatar(
+                         backgroundImage: NetworkImage(snapshot.data!.docs[index].get('profile_url',),),
+                         radius: 18,
+                       ),
+                       backgroundColor: Colors.grey,
+                       radius: 21,
+                     ),
+                      title: Text(snapshot.data!.docs[index].get('name')),
+                      subtitle: Text(snapshot.data!.docs[index]['department']),
+                      trailing: IconButton(onPressed: (){
+                        showModalBottomSheet(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                          context: context, builder:(context) {
+                          return Container(
+                            height:screensize.height*0.5 ,
+                            color: Colors.white,
+                          );
+                        },);
 
-                            ]
-                          ,),
-                        ),
-                        SizedBox(height: 10,),
+                      },icon: Icon(Icons.more_vert),),
 
-                        Container(
-                          height: 350,
-                          width: double.infinity,
-                          child: Image.network(snapshot.data!.docs[index].get("post_url"),fit: BoxFit.cover,)),
-                      ],
-                    );
-                    }),
-                  );}
-                  return Center(child: Text("No posts to show!"),);
-                })
-              ]),
-          padding: EdgeInsets.symmetric(horizontal: 10),
-        )),
+                    ),
+                    height: 50,
+
+                  ),
+                  SizedBox(height: 15,),
+                  Container(height: 0.5,color: Colors.black,),
+
+                  Container(
+                    height: 350,
+                    width: MediaQuery.of(context).size.width,
+                    child: Image.network(snapshot.data!.docs[index].get("post_url"),fit: BoxFit.cover,)),
+                  Row(
+                    children: [
+                      IconButton(onPressed: (){}, icon:Icon(Icons.favorite_outline_sharp)),
+                      IconButton(onPressed: (){}, icon:Icon(Icons.messenger_outline)),
+                      IconButton(onPressed: (){}, icon:Icon(Icons.screen_share_outlined)),
+                    ],
+                  ),
+                  Row(
+                  children: [
+                    SizedBox(width: 10,),
+                    Text(snapshot.data!.docs[index].get('name'),style: TextStyle(fontWeight: FontWeight.bold),),
+                    SizedBox(width: 8,),
+                    Text(snapshot.data!.docs[index].get('caption'),),
+                    SizedBox(width: 10,),
+                  ],
+                  ),
+                  SizedBox(height: 10,),
+                  Container(height: 0.5,color: Colors.grey,),
+                ],
+              );
+              }),
+            );
+          })
+        ]),
       
     );
   }
