@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:stuck/screens/LoginScreen.dart';
 import 'package:stuck/screens/UserDetailScreen.dart';
+import 'package:stuck/screens/bottom_tab_screen.dart';
 import 'package:stuck/utils/Utils.dart';
 import 'package:stuck/utils/auth_methods.dart';
 import 'package:stuck/utils/storage_method.dart';
