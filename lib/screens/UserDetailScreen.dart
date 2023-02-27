@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stuck/University_Department_Data/Department_List.dart';
+import 'package:stuck/screens/bottom_tab_screen.dart';
 import 'package:stuck/utils/Utils.dart';
 import 'package:stuck/utils/storage_method.dart';
 import 'package:stuck/widgets/custom_text_field.dart';
@@ -20,7 +21,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
   String? selectedDepartment;
   String? selectedCourse;
   String? selectedBranch;
-
   String? selectgender;
   String? selectedyear;
 
@@ -29,6 +29,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
   final yearController=TextEditingController();
   Size screensize = Utils().getScreenSize();
   String? getInfo(){
+    _auth.currentUser!.reload();
     url=_auth.currentUser!.photoURL;
     name=_auth.currentUser!.displayName;
     email=_auth.currentUser!.email;
@@ -93,6 +94,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                         child: Column(
                           children: [
                             SizedBox(
+                              
                               child: CustomTextField(rollnoController, "Enter Roll No",
                                   Icons.supervised_user_circle, false),
                               height: 50,
@@ -237,8 +239,12 @@ class _UserDetailPageState extends State<UserDetailPage> {
                 height: 10,
               ),
               ElevatedButton(
-                  onPressed: () {
-                    Storage().saveUserInfo(url:url.toString(),name: name.toString(), email: email.toString(), roll_no: rollnoController.text, department:selectedDepartment.toString(), branch: selectedBranch.toString(), course: selectedCourse.toString(), gender: selectgender.toString(), phoneNo: mobController.text, year: selectedyear.toString());
+                  onPressed: () async{
+                    var res=await Storage().saveUserInfo(url:url.toString(),name: name.toString(), email: email.toString(), roll_no: rollnoController.text, department:selectedDepartment.toString(), branch: selectedBranch.toString(), course: selectedCourse.toString(), gender: selectgender.toString(), phoneNo: mobController.text, year: selectedyear.toString());
+                  print(res);
+                  if(res=="Success"){
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>BottomTabScreen()));
+                  }
                   },
                   child: Text(
                     "Continue ->",

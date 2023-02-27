@@ -19,6 +19,7 @@ class AuthMethod {
       var credentials = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User? user = credentials.user;
+     
       await user!.updateDisplayName(name);
       if (!user.emailVerified) {
         await user.sendEmailVerification();
@@ -26,6 +27,7 @@ class AuthMethod {
       var ref = await _storage.ref("profilepics").child(user.uid);
       await ref.putData(img);
       String url = await ref.getDownloadURL();
+       await user.updatePhotoURL(url);
       var refernece = await _firestore.collection("users").doc(user.uid);
       await refernece.set({
         "name": name,

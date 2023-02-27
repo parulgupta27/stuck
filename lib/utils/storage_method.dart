@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Storage {
   final _firestore = FirebaseFirestore.instance;
+  String bio="";
   saveUserInfo(
       {required String url,
       required String name,
@@ -30,6 +31,7 @@ class Storage {
         phoneNo == "" ||
         year == "") {}
     User user = User(
+        bio: bio,
         url: url,
         name: name,
         email: email,

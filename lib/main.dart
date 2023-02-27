@@ -7,6 +7,8 @@ import 'package:stuck/screens/SplashScreen.dart';
 import 'package:stuck/screens/UserDetailScreen.dart';
 import 'package:stuck/screens/search_screen.dart';
 import 'package:stuck/screens/signup_screen.dart';
+import 'package:stuck/screens/user_profile.dart';
+import './custom_user.dart';
 late double height;
 late double width;
 
@@ -18,8 +20,8 @@ void main() async{
   child:MaterialApp(
     debugShowCheckedModeBanner: false,
     //home:UserDetailPage(),
-    home:SplashScreen(),
-   // home: UserDetailPage(),
+    //home:SplashScreen(),
+    home: BottomTabScreen(),
   )));
 }
 
