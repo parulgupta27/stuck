@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:stuck/utils/Utils.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -11,6 +12,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    Size screensize=Utils().getScreenSize();
     return 
        Scaffold(
         body: Column(children: [
@@ -36,6 +38,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       title: Text(snapshot.data!.docs[index].get('name')),
                       subtitle: Text(snapshot.data!.docs[index]['department']),
                       trailing: IconButton(onPressed: (){
+                        showModalBottomSheet(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                          context: context, builder:(context) {
+                          return Container(
+                            height:screensize.height*0.5 ,
+                            color: Colors.white,
+                          );
+                        },);
 
                       },icon: Icon(Icons.more_vert),),
 
@@ -43,12 +53,31 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 50,
 
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 15,),
+                  Container(height: 0.5,color: Colors.black,),
 
                   Container(
                     height: 350,
                     width: MediaQuery.of(context).size.width,
                     child: Image.network(snapshot.data!.docs[index].get("post_url"),fit: BoxFit.cover,)),
+                  Row(
+                    children: [
+                      IconButton(onPressed: (){}, icon:Icon(Icons.favorite_outline_sharp)),
+                      IconButton(onPressed: (){}, icon:Icon(Icons.messenger_outline)),
+                      IconButton(onPressed: (){}, icon:Icon(Icons.screen_share_outlined)),
+                    ],
+                  ),
+                  Row(
+                  children: [
+                    SizedBox(width: 10,),
+                    Text(snapshot.data!.docs[index].get('name'),style: TextStyle(fontWeight: FontWeight.bold),),
+                    SizedBox(width: 8,),
+                    Text(snapshot.data!.docs[index].get('caption'),),
+                    SizedBox(width: 10,),
+                  ],
+                  ),
+                  SizedBox(height: 10,),
+                  Container(height: 0.5,color: Colors.grey,),
                 ],
               );
               }),
