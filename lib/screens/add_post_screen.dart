@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-import '../models/user_model.dart'as umd;
+import '../models/user_model.dart' as umd;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:stuck/main.dart';
@@ -57,7 +57,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
       body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: width*0.015),
-            child: Column(
+            child: ListView(
                   children: [
             SizedBox(
               height: height * 0.03,
@@ -82,7 +82,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                         ),
                         horizontalTitleGap: width*0.02,
                         title: Text(_auth.currentUser!.displayName.toString()),
-                        subtitle: Text("UIET, Kurukshetra"),
+                        subtitle: Text(user.department),
                       ),
                       
                     ),
@@ -111,15 +111,17 @@ class _AddPostScreenState extends State<AddPostScreen> {
             ),
 
             Container(
-              height: height*0.15,
+              height: height*0.18,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                ListTile(leading: Icon(Icons.edit),title: Text("Caption"),),
               
-               TextField(
-                 controller: _captionController,
-                 maxLines: 3,
+               SingleChildScrollView(
+                 child: TextField(
+                   controller: _captionController,
+                   maxLines: 3,
+                 ),
                ),
               ]),
             ),

@@ -20,23 +20,27 @@ class _HomeScreenState extends State<HomeScreen> {
                 StreamBuilder(
                   stream: FirebaseFirestore.instance.collection("posts").snapshots(),
                   builder: (context,snapshot){
+                    if(snapshot.hasError){
+                      return Center(child: Text("Some Error Occured"),);
+                    }
+                    if(snapshot.hasData){
                   return Expanded(
                     child: ListView.builder(
-                      itemCount: snapshot.data!.docs.length,
+                      itemCount: snapshot.data?.docs.length,
                       itemBuilder: (context,index){
                     return Column(
                       children: [
                         ListTile(
                          leading:CircleAvatar(
                            child: CircleAvatar(
-                             backgroundImage: NetworkImage(snapshot.data!.docs[index].get('profile_url',),),
+                             backgroundImage: NetworkImage(snapshot.data?.docs[index].get('profile_url',),),
                              radius: 18,
                            ),
                            backgroundColor: Colors.grey,
                            radius: 21,
                          ),
-                          title: Text(snapshot.data!.docs[index].get('name')),
-                          subtitle: Text(snapshot.data!.docs[index]['department']),
+                          title: Text(snapshot.data?.docs[index].get('name')),
+                          subtitle: Text(snapshot.data?.docs[index]['department']),
                           trailing: PopupMenuButton(itemBuilder: (context) =>
                             [
 
@@ -52,7 +56,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     );
                     }),
-                  );
+                  );}
+                  return Center(child: Text("No posts to show!"),);
                 })
               ]),
           padding: EdgeInsets.symmetric(horizontal: 10),
