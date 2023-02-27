@@ -45,10 +45,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
         actions: [
           TextButton(
               onPressed: () async{
-              if(image!=null){
                var res=await Storage().uplaodPost(image!, user,_captionController.text);
               print(res);
-              }
               },
               child: Text(
                 "Publish",

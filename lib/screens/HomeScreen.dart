@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Container(
                       height: 350,
                       width: double.infinity,
-                      child: Image.network(snapshot.data!.docs[index].get("url"),fit: BoxFit.cover,));
+                      child: Image.network(snapshot.data!.docs[index].get("post_url"),fit: BoxFit.cover,));
                     }),
                   );
                 })

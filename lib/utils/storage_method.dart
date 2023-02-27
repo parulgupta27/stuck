@@ -71,16 +71,22 @@ class Storage {
  String url=await picref.getDownloadURL();
  var ref= _firestore.collection("students").doc(user.email).collection("posts").doc(time.toString());
  await ref.set({
+   "name":user.name,
+   "department":user.department,
    "caption":caption,
-   "roll_no":user.roll_no,
-   "url":url,
+   "email":user.email,
+  "post_url":url,
+   "profile_url":user.url,
    "id":time,
  });
  ref=_firestore.collection("posts").doc(time.toString());
  await ref.set({
+  "name":user.name,
+   "department":user.department,
    "caption":caption,
-   "roll_no":user.roll_no,
-   "url":url,
+   "email":user.email,
+   "post_url":url,
+   "profile_url":user.url,
    "id":time,
  });
  return "Success";
