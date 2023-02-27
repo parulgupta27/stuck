@@ -17,7 +17,7 @@ class BottomTabScreen extends StatefulWidget {
 class _BottomTabScreenState extends State<BottomTabScreen> {
   umd.User user=umd.User(bio: "bio", url: "url", name: "name", email: "email", roll_no: "roll_no", department: "department", branch: "branch", course: "course", gender: "gender", phoneNo: "phoneNo", year: "year");
   getUser()async{
-  var ref=await FirebaseFirestore.instance.collection("students").doc(_auth.currentUser!.email).get();
+  var ref=await FirebaseFirestore.instance.collection("students").doc(_auth.currentUser?.email).get();
   user= umd.User(bio: ref.get("bio"), url:ref.get("url"), name:ref.get("name"), email: ref.get("email"), roll_no: ref.get("roll_no"), department:ref.get("department"), branch: ref.get("branch"), course: ref.get("course"), gender:ref.get("gender"), phoneNo: ref.get("phoneNo"), year:ref.get("year"));
 setState(() {
   
