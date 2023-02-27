@@ -13,50 +13,48 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return 
        Scaffold(
-        body: SafeArea(
-            child: Padding(
-              child: Column(children: [
-                SizedBox(height: 10,),
-                StreamBuilder(
-                  stream: FirebaseFirestore.instance.collection("posts").snapshots(),
-                  builder: (context,snapshot){
-                  return Expanded(
-                    child: ListView.builder(
-                      itemCount: snapshot.data!.docs.length,
-                      itemBuilder: (context,index){
-                    return Column(
-                      children: [
-                        ListTile(
-                         leading:CircleAvatar(
-                           child: CircleAvatar(
-                             backgroundImage: NetworkImage(snapshot.data!.docs[index].get('profile_url',),),
-                             radius: 18,
-                           ),
-                           backgroundColor: Colors.grey,
-                           radius: 21,
-                         ),
-                          title: Text(snapshot.data!.docs[index].get('name')),
-                          subtitle: Text(snapshot.data!.docs[index]['department']),
-                          trailing: PopupMenuButton(itemBuilder: (context) =>
-                            [
+        body: Column(children: [
+          StreamBuilder(
+            stream: FirebaseFirestore.instance.collection("posts").snapshots(),
+            builder: (context,snapshot){
+            return Expanded(
+              child: ListView.builder(
+                itemCount: snapshot.data!.docs.length,
+                itemBuilder: (context,index){
+              return Column(
+                children: [
+                  SizedBox(
+                    child: ListTile(
+                     leading:CircleAvatar(
+                       child: CircleAvatar(
+                         backgroundImage: NetworkImage(snapshot.data!.docs[index].get('profile_url',),),
+                         radius: 18,
+                       ),
+                       backgroundColor: Colors.grey,
+                       radius: 21,
+                     ),
+                      title: Text(snapshot.data!.docs[index].get('name')),
+                      subtitle: Text(snapshot.data!.docs[index]['department']),
+                      trailing: IconButton(onPressed: (){
 
-                            ]
-                          ,),
-                        ),
-                        SizedBox(height: 10,),
+                      },icon: Icon(Icons.more_vert),),
 
-                        Container(
-                          height: 350,
-                          width: double.infinity,
-                          child: Image.network(snapshot.data!.docs[index].get("post_url"),fit: BoxFit.cover,)),
-                      ],
-                    );
-                    }),
-                  );
-                })
-              ]),
-          padding: EdgeInsets.symmetric(horizontal: 10),
-        )),
+                    ),
+                    height: 50,
+
+                  ),
+                  SizedBox(height: 10,),
+
+                  Container(
+                    height: 350,
+                    width: MediaQuery.of(context).size.width,
+                    child: Image.network(snapshot.data!.docs[index].get("post_url"),fit: BoxFit.cover,)),
+                ],
+              );
+              }),
+            );
+          })
+        ]),
       
     );
   }
