@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:stuck/main.dart';
+import 'package:stuck/models/user_model.dart' as umd;
 import 'package:stuck/screens/HomeScreen.dart';
+import 'package:stuck/screens/add_post_screen.dart';
 import 'package:stuck/screens/search_screen.dart';
-
+import 'package:stuck/screens/signed_user_profile.dart';
 class BottomTabScreen extends StatefulWidget {
   const BottomTabScreen({super.key});
 
@@ -11,7 +15,21 @@ class BottomTabScreen extends StatefulWidget {
 }
 
 class _BottomTabScreenState extends State<BottomTabScreen> {
-  int _currentIndex = 0;
+  umd.User user=umd.User(bio: "bio", url: "url", name: "name", email: "email", roll_no: "roll_no", department: "department", branch: "branch", course: "course", gender: "gender", phoneNo: "phoneNo", year: "year");
+  getUser()async{
+  var ref=await FirebaseFirestore.instance.collection("students").doc(_auth.currentUser!.email).get();
+  user= umd.User(bio: ref.get("bio"), url:ref.get("url"), name:ref.get("name"), email: ref.get("email"), roll_no: ref.get("roll_no"), department:ref.get("department"), branch: ref.get("branch"), course: ref.get("course"), gender:ref.get("gender"), phoneNo: ref.get("phoneNo"), year:ref.get("year"));
+setState(() {
+  
+});
+}@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getUser();
+  }
+  final _auth=FirebaseAuth.instance;
+  var _currentIndex=0;
   void changePage(int val) {
     controller.jumpToPage(val);
     _currentIndex = val;
@@ -25,7 +43,7 @@ class _BottomTabScreenState extends State<BottomTabScreen> {
     height = size.height;
     width = size.width;
     return DefaultTabController(
-      length: 4,
+      length: 5,
       child: Scaffold(
         body: SafeArea(
             child: PageView(
@@ -35,12 +53,9 @@ class _BottomTabScreenState extends State<BottomTabScreen> {
           children: [
             HomeScreen(),
             SearchScreen(),
-            Scaffold(
-              body: Text("Hii"),
-            ),
-            Scaffold(
-              body: Text("Sushu"),
-            ),
+            AddPostScreen(user),
+            Scaffold(body: Center(child: Text("Notifictions")),),
+            SignedUserProfile(user),
           ],
         )),
         bottomNavigationBar: Material(
@@ -79,7 +94,7 @@ class _BottomTabScreenState extends State<BottomTabScreen> {
                   Padding(
                     padding: EdgeInsets.only(top: height*0.003),
                     child: Icon(
-                      Icons.notification_add,
+                      Icons.add,
                       size: height * 0.03,
                       color: _currentIndex == 2 ? Colors.blueGrey : Colors.black,
                     ),
@@ -87,9 +102,23 @@ class _BottomTabScreenState extends State<BottomTabScreen> {
                   Padding(
                     padding: EdgeInsets.only(top: height*0.003),
                     child: Icon(
-                      Icons.person,
+                      Icons.notification_add,
                       size: height * 0.03,
                       color: _currentIndex == 3 ? Colors.blueGrey : Colors.black,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: height*0.003),
+                    child:
+                    user.url=="url"?Icon(
+                      Icons.person,
+                      size: height * 0.03,
+                      color: _currentIndex == 4 ? Colors.blueGrey : Colors.black,
+                    ):
+                    CircleAvatar(
+                      radius: height*0.015,
+                      backgroundColor:Colors.white,
+                      backgroundImage: NetworkImage(user.url.toString()),
                     ),
                   ),
                 ]),

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -10,10 +11,30 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return const  SafeArea(
-      child: Scaffold(
-        body: Center(child: Text("Welcome Tp Home Screen")),
-      ),
+    return 
+       Scaffold(
+        body: SafeArea(
+            child: Padding(
+              child: Column(children: [
+                SizedBox(height: 10,),
+                StreamBuilder(
+                  stream: FirebaseFirestore.instance.collection("posts").snapshots(),
+                  builder: (context,snapshot){
+                  return Expanded(
+                    child: ListView.builder(
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context,index){
+                    return Container(
+                      height: 350,
+                      width: double.infinity,
+                      child: Image.network(snapshot.data!.docs[index].get("url"),fit: BoxFit.cover,));
+                    }),
+                  );
+                })
+              ]),
+          padding: EdgeInsets.symmetric(horizontal: 10),
+        )),
+      
     );
   }
 }

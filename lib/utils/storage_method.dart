@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import '../models/user_model.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Storage {
   final _firestore = FirebaseFirestore.instance;
+  final _storage=FirebaseStorage.instance;
   String bio="";
   saveUserInfo(
       {required String url,
@@ -52,7 +54,7 @@ class Storage {
           .doc(roll_no);
 
       await ref.set(user.toObj());
-      var students = await _firestore.collection("students").doc(roll_no);
+      var students = await _firestore.collection("students").doc(email);
       await students.set(user.toObj());
       return "Success";
     } on FirebaseException catch (e) {
@@ -61,27 +63,33 @@ class Storage {
       return "Internal Error";
     }
   }
-
-  getUsers(CollectionReference ref) async {
-    StreamBuilder<QuerySnapshot>(
-      stream: ref.snapshots(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return Expanded(
-            child: ListView.builder(
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(snapshot.data!.docs[index].get("name")),
-                  );
-                }),
-          );
-        } else {
-          return Center(
-            child: CircularProgressIndicator(color: Colors.blueGrey),
-          );
-        }
-      },
-    );
-  }
+ uplaodPost(Uint8List image, User user,String caption)async{
+   try{
+  var time=99999999999999-DateTime.now().millisecondsSinceEpoch;
+ var picref=_storage.ref("posts").child(time.toString());
+ await picref.putData(image);
+ String url=await picref.getDownloadURL();
+ var ref= _firestore.collection("students").doc(user.email).collection("posts").doc(time.toString());
+ await ref.set({
+   "caption":caption,
+   "roll_no":user.roll_no,
+   "url":url,
+   "id":time,
+ });
+ ref=_firestore.collection("posts").doc(time.toString());
+ await ref.set({
+   "caption":caption,
+   "roll_no":user.roll_no,
+   "url":url,
+   "id":time,
+ });
+ return "Success";
+ }
+ on FirebaseException catch(e){
+   return e.code;
+ }
+ catch(e){
+return "Internal Error";
+ }
+ }
 }
