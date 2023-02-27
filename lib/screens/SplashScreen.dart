@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:stuck/screens/ForgotPasswordScreen.dart';
 //import 'package:stuck/screens/HomeScreen.dart';
 import 'package:stuck/screens/LoginScreen.dart';
 import 'package:stuck/screens/bottom_tab_screen.dart';
+import 'package:stuck/widgets/PostWidget.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -24,13 +26,13 @@ final auth=FirebaseAuth.instance;
     if(user!=null)
       {
         Timer(const Duration(seconds: 5),(){
-          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) =>const BottomTabScreen(),));
+          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) =>const ForgotPasswordScreen(),));
         });
       }
     else
       {
         Timer(const Duration(seconds: 5),(){
-          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) =>const LoginScreen(),));
+          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) =>const ForgotPasswordScreen(),));
         });
       }
   }

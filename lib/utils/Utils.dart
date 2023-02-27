@@ -11,7 +11,7 @@ class Utils
 
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-            backgroundColor: Colors.orange,
+            backgroundColor: Colors.brown,
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(10),

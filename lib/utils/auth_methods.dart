@@ -50,6 +50,7 @@ class AuthMethod {
       if (!user!.emailVerified) {
         await user.sendEmailVerification();
       }
+      return "Success";
     } on FirebaseAuthException catch (e) {
       return e.code;
     } catch (e) {

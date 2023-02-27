@@ -58,6 +58,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       return ListView.builder(
                           itemCount: snapshot.data!.docs.length,
                           itemBuilder: (context, index) {
+                           
                             if (snapshot.data!.docs[index]
                                 .get("name")
                                 .toString()
