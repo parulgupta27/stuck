@@ -24,10 +24,33 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: ListView.builder(
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (context,index){
-                    return Container(
-                      height: 350,
-                      width: double.infinity,
-                      child: Image.network(snapshot.data!.docs[index].get("url"),fit: BoxFit.cover,));
+                    return Column(
+                      children: [
+                        ListTile(
+                         leading:CircleAvatar(
+                           child: CircleAvatar(
+                             backgroundImage: NetworkImage(snapshot.data!.docs[index].get('profile_url',),),
+                             radius: 18,
+                           ),
+                           backgroundColor: Colors.grey,
+                           radius: 21,
+                         ),
+                          title: Text(snapshot.data!.docs[index].get('name')),
+                          subtitle: Text(snapshot.data!.docs[index]['department']),
+                          trailing: PopupMenuButton(itemBuilder: (context) =>
+                            [
+
+                            ]
+                          ,),
+                        ),
+                        SizedBox(height: 10,),
+
+                        Container(
+                          height: 350,
+                          width: double.infinity,
+                          child: Image.network(snapshot.data!.docs[index].get("post_url"),fit: BoxFit.cover,)),
+                      ],
+                    );
                     }),
                   );
                 })
