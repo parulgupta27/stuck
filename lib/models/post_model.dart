@@ -4,7 +4,7 @@ class PostModel{
   String? post_url;
   String? profile_url;
   String? email;
-  String? id;
+  int? id;
   String? name;
   String? department;
   String ?caption;
@@ -22,7 +22,7 @@ class PostModel{
  }
  fromObj(QueryDocumentSnapshot<Map<String,dynamic>>post){
  post_url=post.get("post_url");
- profile_url=post.get("profiel_url");
+ profile_url=post.get("profile_url");
  email=post.get("email");
  id=post.get("id");
  name=post.get("name");

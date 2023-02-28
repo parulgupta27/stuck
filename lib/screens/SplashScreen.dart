@@ -38,12 +38,12 @@ final auth=FirebaseAuth.instance;
   }
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body:Center(
+    return  Scaffold(
+        body:SafeArea(child:
+        Center(
           child: Image.asset("assets/Images/stuck.png",fit: BoxFit.cover,height: 130,width: 130,),
           ),
-      ),
-    );
+      
+    ));
   }
 }
