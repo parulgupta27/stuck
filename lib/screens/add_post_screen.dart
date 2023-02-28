@@ -79,7 +79,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                       child: ListTile(
                       
                         minVerticalPadding: height*0.01,
-                        leading: CircleAvatar(backgroundImage: NetworkImage(user.url),
+                        leading: CircleAvatar(backgroundImage: NetworkImage(user.url!),
                         radius: height*0.025,
                         ),
                         horizontalTitleGap: width*0.02,
