@@ -20,7 +20,7 @@ class PostModel{
      "caption":caption
    };
  }
- fromObj(QueryDocumentSnapshot<Map<String,dynamic>>post){
+ fromObj(DocumentSnapshot<Map<String,dynamic>>post){
  post_url=post.get("post_url");
  profile_url=post.get("profile_url");
  email=post.get("email");

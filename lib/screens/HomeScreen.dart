@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
        Scaffold(
         body: SafeArea(
           child: Column(children: [
-            StreamBuilder(
+            StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance.collection("posts").snapshots(),
               builder: (context,snapshot){
               return Expanded(
@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     
                     var data=snapshot.data!.docs[index];
                     PostModel post=PostModel();
-                    post.fromObj(data);
+                    post.fromObj(data as DocumentSnapshot<Map<String,dynamic>>);
                 return PostWidget(post);
               }));
               }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stuck/main.dart';
 import 'package:stuck/models/user_model.dart';
+import 'package:stuck/screens/bottom_tab_screen.dart';
 import 'package:stuck/widgets/post_grid_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 class SignedUserProfile extends StatefulWidget {
@@ -41,7 +42,7 @@ class _SignedUserProfileState extends State<SignedUserProfile> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               IconButton(onPressed: (){
-              Navigator.pop(context);
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>BottomTabScreen()));
               }, icon: Icon(Icons.arrow_back))
             ],),
           SizedBox(
