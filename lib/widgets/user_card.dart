@@ -17,9 +17,9 @@ class UserCard extends StatelessWidget {
         width: double.infinity,
         child: Padding(padding: EdgeInsets.symmetric(horizontal: width*0.015),
         child: ListTile(
-          leading: CircleAvatar(radius: height*0.025,backgroundImage:NetworkImage(user.url),),
-          title: Text(user.name),
-          subtitle: Text(user.department,style: TextStyle(fontSize: height*0.014),),
+          leading: CircleAvatar(radius: height*0.025,backgroundImage:NetworkImage(user.url!),),
+          title: Text(user.name!),
+          subtitle: Text(user.department!,style: TextStyle(fontSize: height*0.014),),
         ),
         ),
       ),

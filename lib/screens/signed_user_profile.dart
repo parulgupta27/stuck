@@ -47,7 +47,7 @@ class _SignedUserProfileState extends State<SignedUserProfile> {
                   height: height * 0.09,
                   child: CircleAvatar(
                       radius: height * 0.045,
-                      backgroundImage: NetworkImage(user.url)),
+                      backgroundImage: NetworkImage(user.url!)),
                 ),
                 SizedBox(
                   width: width * 0.05,
@@ -60,7 +60,7 @@ class _SignedUserProfileState extends State<SignedUserProfile> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        user.name,
+                        user.name!,
                         style: TextStyle(
                             fontSize: height * 0.022,
                             fontWeight: FontWeight.w500),
@@ -69,7 +69,7 @@ class _SignedUserProfileState extends State<SignedUserProfile> {
                         height: height * 0.003,
                       ),
                       Text(
-                        user.department,
+                        user.department!,
                         style: TextStyle(
                             color: Colors.grey,
                             fontSize: height * 0.014,
@@ -89,7 +89,7 @@ class _SignedUserProfileState extends State<SignedUserProfile> {
             padding: EdgeInsets.symmetric(horizontal: width * 0.03),
             child: Container(
               child: Text(
-               user.bio,
+               user.bio!,
                 style: TextStyle(
                     fontSize: height * 0.015, fontWeight: FontWeight.w500),
               ),
