@@ -115,6 +115,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                               SizedBox(height: 12,),
 
                               TextFormField(
+                                controller: _captionController,
                                 maxLines: 3,
                                 decoration: InputDecoration(
                                   hintText: "Caption here",
