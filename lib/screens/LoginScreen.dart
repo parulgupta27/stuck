@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import'package:flutter/material.dart';
+import 'package:stuck/screens/ForgotPasswordScreen.dart';
 import 'package:stuck/screens/bottom_tab_screen.dart';
 import 'package:stuck/screens/signup_screen.dart';
 import 'package:stuck/utils/Utils.dart';
@@ -85,7 +86,9 @@ Size screensize=Utils().getScreenSize();
                              },
                            ),
                          ),
-                         TextButton(onPressed: (){}, child:Text("Forgot Password")),
+                         TextButton(onPressed: (){
+                           Navigator.push(context,MaterialPageRoute(builder: (context) => ForgotPasswordScreen(),));
+                         }, child:Text("Forgot Password")),
                        ],
                      ),
                    ),
