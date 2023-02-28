@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stuck/main.dart';
 import 'package:stuck/models/user_model.dart';
 import 'package:stuck/widgets/post_grid_view.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 class SignedUserProfile extends StatefulWidget {
   User user;
   SignedUserProfile(this.user);
@@ -21,56 +22,59 @@ class _SignedUserProfileState extends State<SignedUserProfile> {
 
     body:  SafeArea(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: width * 0.05),
+        padding: EdgeInsets.symmetric(horizontal: width * 0.00),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           SizedBox(
             height: height * 0.04,
           ),
-          Row(
-            children: [
-              Container(
-                height: height * 0.09,
-                child: CircleAvatar(
-                    radius: height * 0.045,
-                    backgroundImage: NetworkImage(user.url)),
-              ),
-              SizedBox(
-                width: width * 0.05,
-              ),
-              Container(
-                height: height * 0.09,
-                width: width * 0.6,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      user.name,
-                      style: TextStyle(
-                          fontSize: height * 0.022,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    SizedBox(
-                      height: height * 0.003,
-                    ),
-                    Text(
-                      user.department,
-                      style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: height * 0.014,
-                          fontWeight: FontWeight.w500),
-                    )
-                  ],
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: width*0.03),
+            child: Row(
+              children: [
+                Container(
+                  height: height * 0.09,
+                  child: CircleAvatar(
+                      radius: height * 0.045,
+                      backgroundImage: NetworkImage(user.url)),
                 ),
-              ),
-            ],
+                SizedBox(
+                  width: width * 0.05,
+                ),
+                Container(
+                  height: height * 0.09,
+                  width: width * 0.6,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        user.name,
+                        style: TextStyle(
+                            fontSize: height * 0.022,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      SizedBox(
+                        height: height * 0.003,
+                      ),
+                      Text(
+                        user.department,
+                        style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: height * 0.014,
+                            fontWeight: FontWeight.w500),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
           SizedBox(
             height: height * 0.012,
           ),
           (user.bio!="")?
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: width * 0.01),
+            padding: EdgeInsets.symmetric(horizontal: width * 0.03),
             child: Container(
               child: Text(
                user.bio,
@@ -82,85 +86,67 @@ class _SignedUserProfileState extends State<SignedUserProfile> {
           SizedBox(
             height: height * 0.02,
           ),
-          Row(
-            children: [
-              Container(
-                height: height * 0.12,
-                width: width * 0.43,
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 215, 215, 215),
-                  borderRadius: BorderRadius.circular(height * 0.01),
-                  
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: width*0.02),
+            child: Row(
+              children: [
+                Container(
+                  height: height * 0.12,
+                  width: width * 0.46,
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 215, 215, 215),
+                    borderRadius: BorderRadius.circular(height * 0.01),
+                    
+                  ),
+                  child: Center(child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                    Text("100K",style: TextStyle(fontSize: height*0.02,fontWeight: FontWeight.w700),),
+                    Text("Connections",style: TextStyle(fontSize: height*0.016,fontWeight: FontWeight.w500),),
+                  ],)),
                 ),
-                child: Center(child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                  Text("100K",style: TextStyle(fontSize: height*0.02,fontWeight: FontWeight.w700),),
-                  Text("Connections",style: TextStyle(fontSize: height*0.016,fontWeight: FontWeight.w500),),
-                ],)),
-              ),
-              SizedBox(
-                width: width * 0.04,
-              ),
-              Container(
-                height: height * 0.12,
-                width: width * 0.43,
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 215, 215, 215),
-                  borderRadius: BorderRadius.circular(height * 0.01),
+                SizedBox(
+                  width: width * 0.04,
                 ),
-                 child: Center(child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                  Text("100",style: TextStyle(fontSize: height*0.02,fontWeight: FontWeight.w700),),
-                  Text("Posts",style: TextStyle(fontSize: height*0.016,fontWeight: FontWeight.w500),),
-                ],)),
-              ),
-            ],
+                Container(
+                  height: height * 0.12,
+                  width: width * 0.46,
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 215, 215, 215),
+                    borderRadius: BorderRadius.circular(height * 0.01),
+                  ),
+                   child: Center(child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                    Text("100",style: TextStyle(fontSize: height*0.02,fontWeight: FontWeight.w700),),
+                    Text("Posts",style: TextStyle(fontSize: height*0.016,fontWeight: FontWeight.w500),),
+                  ],)),
+                ),
+              ],
+            ),
           ),
           SizedBox(
             height: height * .02,
           ),
-          Row(
-            children: [
-              SizedBox(
-                height: height*0.04,
-                width: width*0.43,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                  ),
-                    onPressed: () {},
-                    child: Center(
-                      child: Text("Connect",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w500),),
-                    )),
-              ),
-              SizedBox(width: width*0.04,),
-              SizedBox(
-                height: height*0.04,
-                width: width*0.43,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                  ),
-                    onPressed: () {},
-                    child: Center(
-                      child: Text("Share",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w500),),
-                    )),
-              ),
-            ],
-          ),
+          Padding(padding: EdgeInsets.symmetric(horizontal: width*0.02),
+          child: SizedBox(height: height*0.04,
+          width: double.infinity,
+          child: ElevatedButton(child: Text("Edit Profile"),onPressed: (){},),
+          ),),
           SizedBox(height: height*0.03,),
           Divider(
            thickness: 3, 
            height: 2,
           ),
           SizedBox(height: height*0.005,),
-          Text("Posts",style: TextStyle(fontSize: height*0.02,fontWeight: FontWeight.w600),)
-        ,SizedBox(height: height*0.03,),
-       // SingleChildScrollView(child: PostsGridView(user, size)),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: width*0.005),
+            child: Text("Posts",style: TextStyle(fontSize: height*0.025,fontWeight: FontWeight.w700),),
+          )
+        ,SizedBox(height: height*0.008,),
+        PostGridView(user, size),
         ]),
       ),
     ),

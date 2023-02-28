@@ -12,6 +12,7 @@ import 'package:stuck/screens/search_screen.dart';
 import 'package:stuck/screens/signed_user_profile.dart';
 import 'package:stuck/screens/signup_screen.dart';
 import 'package:stuck/screens/user_profile.dart';
+import 'package:stuck/widgets/post_grid_view.dart';
 import './custom_user.dart';
 late double height;
 late double width;
@@ -24,8 +25,8 @@ void main() async{
   child:MaterialApp(
     debugShowCheckedModeBanner: false,
     //home:UserDetailPage(),
-    //home:SplashScreen(),
-    home: BottomTabScreen(),
+    home:SplashScreen(),
+    //home: LoginScreen(),
   )));
 }
 

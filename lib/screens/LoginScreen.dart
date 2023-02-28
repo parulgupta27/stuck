@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import'package:flutter/material.dart';
 import 'package:stuck/screens/bottom_tab_screen.dart';
+import 'package:stuck/screens/signup_screen.dart';
 import 'package:stuck/utils/Utils.dart';
 import 'package:stuck/utils/auth_methods.dart';
 import 'package:stuck/widgets/RoundedButton.dart';
@@ -105,7 +106,9 @@ Size screensize=Utils().getScreenSize();
                  SizedBox(
                    width: screensize.width*0.6,
                      child: RoundedButton(
-                         label: Text(" Sign Up"), callback:(){})),
+                         label: Text(" Sign Up"), callback:(){
+                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignupScreen()));
+                         })),
                  SizedBox(height: 20,),
 
 

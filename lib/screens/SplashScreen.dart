@@ -26,13 +26,13 @@ final auth=FirebaseAuth.instance;
     if(user!=null)
       {
         Timer(const Duration(seconds: 5),(){
-          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) =>const ForgotPasswordScreen(),));
+          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) =>const LoginScreen(),));
         });
       }
     else
       {
         Timer(const Duration(seconds: 5),(){
-          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) =>const ForgotPasswordScreen(),));
+          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) =>const LoginScreen(),));
         });
       }
   }

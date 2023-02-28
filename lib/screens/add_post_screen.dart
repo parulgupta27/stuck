@@ -83,8 +83,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
                         radius: height*0.025,
                         ),
                         horizontalTitleGap: width*0.02,
-                        title: Text(user.name.toString()),
-                        subtitle: Text("UIET, Kurukshetra"),
+                        title: Text(_auth.currentUser!.displayName.toString()),
+                        subtitle: Text(user.department),
                       ),
                       
                     ),
@@ -131,6 +131,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                               SizedBox(height: height*0.01,),
             ElevatedButton(onPressed: ()async{
                       image=await AuthMethod().getUserImage();
+                      
                       setState(() {
                         
                       });
