@@ -1,14 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:stuck/main.dart';
 import 'package:stuck/models/post_model.dart';
-
+import 'package:stuck/models/user_model.dart'as umd;
+import 'package:stuck/screens/signed_user_profile.dart';
+import 'package:stuck/screens/user_profile.dart';
 class PostWidget extends StatefulWidget {
   PostModel post;
   PostWidget(this.post);
 
   @override
   State<PostWidget> createState() => _PostWidgetState(this.post);
+}
+navigateToUserProfile(String email,BuildContext context)async{
+var _auth=FirebaseAuth.instance;
+var ref=await FirebaseFirestore.instance.collection("students").doc(email).get();
+umd.User user=umd.User();
+user.fromObj(ref);
+if(email==_auth.currentUser!.email){
+Navigator.push(context, MaterialPageRoute(builder: (context)=>SignedUserProfile(user)));
+}
+else{
+  Navigator.push(context, MaterialPageRoute(builder: (context)=>UserProfile(user)));
+}
 }
 
 class _PostWidgetState extends State<PostWidget> {
@@ -23,6 +38,9 @@ class _PostWidgetState extends State<PostWidget> {
                   children: [
                     SizedBox(
                       child: ListTile(
+                        onTap: (){
+                          navigateToUserProfile(post.email!, context);
+                        },
                        leading:CircleAvatar(
                          child: CircleAvatar(
                            backgroundImage: NetworkImage(post.profile_url!,),

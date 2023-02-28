@@ -36,8 +36,16 @@ class _SignedUserProfileState extends State<SignedUserProfile> {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: width * 0.00),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          SizedBox(height: height*0.015,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              IconButton(onPressed: (){
+              Navigator.pop(context);
+              }, icon: Icon(Icons.arrow_back))
+            ],),
           SizedBox(
-            height: height * 0.04,
+            height: height * 0.01,
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: width*0.03),
