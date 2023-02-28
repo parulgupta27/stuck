@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:stuck/main.dart';
 import 'package:stuck/utils/Utils.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -67,15 +68,25 @@ class _HomeScreenState extends State<HomeScreen> {
                       IconButton(onPressed: (){}, icon:Icon(Icons.screen_share_outlined)),
                     ],
                   ),
-                  Row(
-                  children: [
-                    SizedBox(width: 10,),
-                    Text(snapshot.data!.docs[index].get('name'),style: TextStyle(fontWeight: FontWeight.bold),),
-                    SizedBox(width: 8,),
-                    Text(snapshot.data!.docs[index].get('caption'),),
-                    SizedBox(width: 10,),
-                  ],
+                  Positioned(
+                  left: 2,
+                    child: RichText(
+                      textDirection:TextDirection.ltr,
+                      text: TextSpan(
+                      text: " ${snapshot.data!.docs[index].get('name').toString()} ",
+                      style: TextStyle(
+                        color:Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: snapshot.data!.docs[index].get('caption'),
+                          style: TextStyle(fontWeight: FontWeight.normal),
+                        )
+                      ],
+                    ),),
                   ),
+
                   SizedBox(height: 10,),
                   Container(height: 0.5,color: Colors.grey,),
                 ],

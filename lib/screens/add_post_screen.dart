@@ -1,5 +1,7 @@
 import 'dart:typed_data';
-import '../models/user_model.dart'as umd;
+import 'package:stuck/widgets/custom_text_field.dart';
+
+import '../models/user_model.dart' as umd;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:stuck/main.dart';
@@ -57,7 +59,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
       body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: width*0.015),
-            child: Column(
+            child: ListView(
                   children: [
             SizedBox(
               height: height * 0.03,
@@ -77,27 +79,28 @@ class _AddPostScreenState extends State<AddPostScreen> {
                       child: ListTile(
                       
                         minVerticalPadding: height*0.01,
-                        leading: CircleAvatar(backgroundImage: NetworkImage(_auth.currentUser!.phoneNumber.toString()),
+                        leading: CircleAvatar(backgroundImage: NetworkImage(user.url),
                         radius: height*0.025,
                         ),
                         horizontalTitleGap: width*0.02,
-                        title: Text(_auth.currentUser!.displayName.toString()),
+                        title: Text(user.name.toString()),
                         subtitle: Text("UIET, Kurukshetra"),
                       ),
                       
                     ),
+                    SizedBox(height: height*0.01,),
                    
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal:width*0.01),
                       child: Container(
-                      height: height*0.425,
+                      height: height*0.415,
                       width: double.infinity,
                       child: image==null?Center(child: Text("Select a pic"),):Image.memory(image!,fit: BoxFit.cover,),
                       ),
                     ),
                     SizedBox(height: height*0.005,),
                     Padding(
-                      padding:EdgeInsets.all(8.0),
+                      padding:EdgeInsets.all(height*0.008),
                       child: Row(children: [
                         Icon(Icons.favorite_outline,size: height*0.03,),
                         SizedBox(width: width*0.035,),
@@ -109,20 +112,22 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   ]),
               ),
             ),
+                              SizedBox(height: 12,),
 
-            Container(
-              height: height*0.15,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-               ListTile(leading: Icon(Icons.edit),title: Text("Caption"),),
-              
-               TextField(
-                 controller: _captionController,
-                 maxLines: 3,
-               ),
-              ]),
-            ),
+                              TextFormField(
+                                maxLines: 3,
+                                decoration: InputDecoration(
+                                  hintText: "Caption here",
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.grey,
+                                      width: 1,
+                                    ),
+                                  ),
+                                ),
+                              ),
+
+
                               SizedBox(height: height*0.01,),
             ElevatedButton(onPressed: ()async{
                       image=await AuthMethod().getUserImage();
