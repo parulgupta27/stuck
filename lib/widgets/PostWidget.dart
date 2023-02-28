@@ -6,6 +6,8 @@ import 'package:stuck/models/post_model.dart';
 import 'package:stuck/models/user_model.dart'as umd;
 import 'package:stuck/screens/signed_user_profile.dart';
 import 'package:stuck/screens/user_profile.dart';
+import 'package:stuck/utils/Utils.dart';
+import 'package:stuck/utils/storage_method.dart';
 class PostWidget extends StatefulWidget {
   PostModel post;
   PostWidget(this.post);
@@ -52,12 +54,25 @@ class _PostWidgetState extends State<PostWidget> {
                         title: Text(post.name!),
                         subtitle: Text(post.department!),
                         trailing: IconButton(onPressed: (){
+                      
                           showModalBottomSheet(
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(height*0.020)),
                             context: context, builder:(context) {
                             return Container(
                               height:height*0.5,
                               color: Colors.white,
+                              child: Column(children: [
+                                SizedBox(height: height*0.01,),
+                                IconButton(onPressed: ()async{
+
+                               var res=await Storage().deletePost(post);
+                          print(post.id);
+                          print(res);
+                            Navigator.pop(context);
+                            Utils().showSnackBar(context: context,content: res);
+                          
+                                }, icon: Icon(Icons.delete)),
+                              ]),
                             );
                           },);
         

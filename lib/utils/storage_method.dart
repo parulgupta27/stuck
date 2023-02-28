@@ -1,4 +1,6 @@
 import 'dart:typed_data';
+import 'package:stuck/models/post_model.dart';
+
 import '../models/user_model.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -98,4 +100,18 @@ class Storage {
 return "Internal Error";
  }
  }
+deletePost(PostModel post)async{
+  try{
+await FirebaseFirestore.instance.collection("students").doc(post.email!).collection("posts").doc(post.id!.toString()).delete();
+await FirebaseFirestore.instance.collection("posts").doc(post.id!.toString()).delete();
+await FirebaseStorage.instance.ref("posts").child(post.id!.toString()).delete();
+return "Deleted";
+  }
+  on FirebaseException catch (e){
+    return e.code;
+  }
+  catch (e){
+  return "Error Occured";
+  }
+}
 }
