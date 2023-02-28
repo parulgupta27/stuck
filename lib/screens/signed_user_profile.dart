@@ -12,14 +12,26 @@ class SignedUserProfile extends StatefulWidget {
 class _SignedUserProfileState extends State<SignedUserProfile> {
   User user;
   _SignedUserProfileState(this.user);
+      int? posts;
+    getPostCount()async{
+      posts=await FirebaseFirestore.instance.collection("students").doc(user.email).collection("posts").snapshots().length;
+    setState(() {
+      
+    });}
+    @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getPostCount();
+
+  }
   @override
   Widget build(BuildContext context) {
     Size size=MediaQuery.of(context).size;
     height=size.height;
     width=size.width;
-    return Scaffold(
-    
 
+    return Scaffold(
     body:  SafeArea(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: width * 0.00),
@@ -120,7 +132,7 @@ class _SignedUserProfileState extends State<SignedUserProfile> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                    Text("100",style: TextStyle(fontSize: height*0.02,fontWeight: FontWeight.w700),),
+                    Text(posts.toString(),style: TextStyle(fontSize: height*0.02,fontWeight: FontWeight.w700),),
                     Text("Posts",style: TextStyle(fontSize: height*0.016,fontWeight: FontWeight.w500),),
                   ],)),
                 ),
