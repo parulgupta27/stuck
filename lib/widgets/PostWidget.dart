@@ -1,7 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:stuck/models/post_model.dart';
 
 class PostWidget extends StatelessWidget {
-  const PostWidget({Key? key}) : super(key: key);
+  PostModel
+  post;
+  PostWidget(this.post);
 
   @override
   Widget build(BuildContext context) {

@@ -84,7 +84,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                         ),
                         horizontalTitleGap: width*0.02,
                         title: Text(_auth.currentUser!.displayName.toString()),
-                        subtitle: Text(user.department),
+                        subtitle: Text(user.department!),
                       ),
                       
                     ),

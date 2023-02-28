@@ -25,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: ListView.builder(
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context,index){
+                    var data=snapshot.data!.docs[index];
                 return Column(
                   children: [
                     SizedBox(

@@ -63,7 +63,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                 .toLowerCase()
                                 .contains(value.val.toString().toLowerCase())) {
                                 
-                                  User user=User(url: snapshot.data!.docs[index].get("url"), name:snapshot.data!.docs[index].get("name"), email: snapshot.data!.docs[index].get("email"), roll_no: snapshot.data!.docs[index].get("roll_no"), department: snapshot.data!.docs[index].get("department"), branch:snapshot.data!.docs[index].get("branch"), course: snapshot.data!.docs[index].get("course"), gender: snapshot.data!.docs[index].get("gender"), phoneNo: snapshot.data!.docs[index].get("phoneNo"), year:snapshot.data!.docs[index].get("year"),bio: snapshot.data!.docs[index].get("bio").toString());  
+                                  User user=User();  
+                                  user.fromObj(snapshot.data!.docs[index] as DocumentSnapshot<Map<String,dynamic>> );
                               return UserCard(user);
                             }
                             else{
