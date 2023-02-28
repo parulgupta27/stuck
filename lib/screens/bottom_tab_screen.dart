@@ -7,6 +7,7 @@ import 'package:stuck/screens/HomeScreen.dart';
 import 'package:stuck/screens/add_post_screen.dart';
 import 'package:stuck/screens/search_screen.dart';
 import 'package:stuck/screens/signed_user_profile.dart';
+import 'package:stuck/widgets/post_grid_view.dart';
 class BottomTabScreen extends StatefulWidget {
   const BottomTabScreen({super.key});
 

@@ -15,75 +15,77 @@ class _HomeScreenState extends State<HomeScreen> {
     Size screensize=Utils().getScreenSize();
     return 
        Scaffold(
-        body: Column(children: [
-          StreamBuilder(
-            stream: FirebaseFirestore.instance.collection("posts").snapshots(),
-            builder: (context,snapshot){
-            return Expanded(
-              child: ListView.builder(
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (context,index){
-              return Column(
-                children: [
-                  SizedBox(
-                    child: ListTile(
-                     leading:CircleAvatar(
-                       child: CircleAvatar(
-                         backgroundImage: NetworkImage(snapshot.data!.docs[index].get('profile_url',),),
-                         radius: 18,
-                       ),
-                       backgroundColor: Colors.grey,
-                       radius: 21,
-                     ),
-                      title: Text(snapshot.data!.docs[index].get('name')),
-                      subtitle: Text(snapshot.data!.docs[index]['department']),
-                      trailing: IconButton(onPressed: (){
-                        showModalBottomSheet(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                          context: context, builder:(context) {
-                          return Container(
-                            height:screensize.height*0.5 ,
-                            color: Colors.white,
-                          );
-                        },);
-
-                      },icon: Icon(Icons.more_vert),),
-
-                    ),
-                    height: 50,
-
-                  ),
-                  SizedBox(height: 15,),
-                  Container(height: 0.5,color: Colors.black,),
-
-                  Container(
-                    height: 350,
-                    width: MediaQuery.of(context).size.width,
-                    child: Image.network(snapshot.data!.docs[index].get("post_url"),fit: BoxFit.cover,)),
-                  Row(
-                    children: [
-                      IconButton(onPressed: (){}, icon:Icon(Icons.favorite_outline_sharp)),
-                      IconButton(onPressed: (){}, icon:Icon(Icons.messenger_outline)),
-                      IconButton(onPressed: (){}, icon:Icon(Icons.screen_share_outlined)),
-                    ],
-                  ),
-                  Row(
+        body: SafeArea(
+          child: Column(children: [
+            StreamBuilder(
+              stream: FirebaseFirestore.instance.collection("posts").snapshots(),
+              builder: (context,snapshot){
+              return Expanded(
+                child: ListView.builder(
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (context,index){
+                return Column(
                   children: [
-                    SizedBox(width: 10,),
-                    Text(snapshot.data!.docs[index].get('name'),style: TextStyle(fontWeight: FontWeight.bold),),
-                    SizedBox(width: 8,),
-                    Text(snapshot.data!.docs[index].get('caption'),),
-                    SizedBox(width: 10,),
+                    SizedBox(
+                      child: ListTile(
+                       leading:CircleAvatar(
+                         child: CircleAvatar(
+                           backgroundImage: NetworkImage(snapshot.data!.docs[index].get('profile_url',),),
+                           radius: 18,
+                         ),
+                         backgroundColor: Colors.grey,
+                         radius: 21,
+                       ),
+                        title: Text(snapshot.data!.docs[index].get('name')),
+                        subtitle: Text(snapshot.data!.docs[index]['department']),
+                        trailing: IconButton(onPressed: (){
+                          showModalBottomSheet(
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                            context: context, builder:(context) {
+                            return Container(
+                              height:screensize.height*0.5 ,
+                              color: Colors.white,
+                            );
+                          },);
+        
+                        },icon: Icon(Icons.more_vert),),
+        
+                      ),
+                      height: 50,
+        
+                    ),
+                    SizedBox(height: 15,),
+                    Container(height: 0.5,color: Colors.black,),
+        
+                    Container(
+                      height: 400,
+                      width: MediaQuery.of(context).size.width,
+                      child: Image.network(snapshot.data!.docs[index].get("post_url"),fit: BoxFit.cover,)),
+                    Row(
+                      children: [
+                        IconButton(onPressed: (){}, icon:Icon(Icons.favorite_outline_sharp)),
+                        IconButton(onPressed: (){}, icon:Icon(Icons.messenger_outline)),
+                        IconButton(onPressed: (){}, icon:Icon(Icons.screen_share_outlined)),
+                      ],
+                    ),
+                    Row(
+                    children: [
+                      SizedBox(width: 10,),
+                      Text(snapshot.data!.docs[index].get('name'),style: TextStyle(fontWeight: FontWeight.bold),),
+                      SizedBox(width: 8,),
+                      Text(snapshot.data!.docs[index].get('caption'),),
+                      SizedBox(width: 10,),
+                    ],
+                    ),
+                    SizedBox(height: 10,),
+                    Container(height: 0.5,color: Colors.grey,),
                   ],
-                  ),
-                  SizedBox(height: 10,),
-                  Container(height: 0.5,color: Colors.grey,),
-                ],
+                );
+                }),
               );
-              }),
-            );
-          })
-        ]),
+            })
+          ]),
+        ),
       
     );
   }

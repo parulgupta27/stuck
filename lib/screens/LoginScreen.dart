@@ -105,7 +105,11 @@ Size screensize=Utils().getScreenSize();
                  SizedBox(
                    width: screensize.width*0.6,
                      child: RoundedButton(
-                         label: Text(" Sign Up"), callback:(){})),
+                         label: Text(" Sign Up"), callback:()async{
+                           var res=await AuthMethod().signInUser(emailController.text, passwordController.text);
+                           if(res=="Success")
+                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>BottomTabScreen()));
+                         })),
                  SizedBox(height: 20,),
 
 
