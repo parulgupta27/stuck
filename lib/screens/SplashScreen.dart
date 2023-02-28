@@ -26,7 +26,7 @@ final auth=FirebaseAuth.instance;
     if(user!=null)
       {
         Timer(const Duration(seconds: 5),(){
-          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) =>const LoginScreen(),));
+          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) =>const BottomTabScreen(),));
         });
       }
     else

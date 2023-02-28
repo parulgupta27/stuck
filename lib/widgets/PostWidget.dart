@@ -37,6 +37,7 @@ class _PostWidgetState extends State<PostWidget> {
     height=size.height;
     width=size.width;
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
                       child: ListTile(
@@ -79,11 +80,11 @@ class _PostWidgetState extends State<PostWidget> {
                         },icon: Icon(Icons.more_vert),),
         
                       ),
-                      height: height*0.055,
+                      height: height*0.075,
         
                     ),
                     SizedBox(height: height*0.016,),
-                    Container(height: 0.5,color: Colors.black,),
+                    
         
                     Container(
                       height: height*0.42,
@@ -96,15 +97,7 @@ class _PostWidgetState extends State<PostWidget> {
                         IconButton(onPressed: (){}, icon:Icon(Icons.screen_share_outlined)),
                       ],
                     ),
-                    Row(
-                    children: [
-                      SizedBox(width: width*0.011,),
-                      Text(post.name!,style: TextStyle(fontWeight: FontWeight.bold),),
-                      SizedBox(width: width*0.009,),
-                      Text(post.caption!,),
-                      SizedBox(width:  width*0.011,),
-                    ],
-                  ),
+
                   Positioned(
                   left: 2,
                     child: RichText(
@@ -126,6 +119,6 @@ class _PostWidgetState extends State<PostWidget> {
                     SizedBox(height: height*0.011,),
                     Container(height: 0.5,color: Colors.grey,),
                   ],
-                );;
+                );
   }
 }
