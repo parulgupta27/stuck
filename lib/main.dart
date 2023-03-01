@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stuck/bottom_sheets/user_info_bottom_sheet.dart';
 import 'package:stuck/providers/search_provider.dart';
+import 'package:stuck/screens/HomeScreen.dart';
 import 'package:stuck/screens/LoginScreen.dart';
 import 'package:stuck/screens/add_post_screen.dart';
 import 'package:stuck/screens/bottom_tab_screen.dart';
@@ -26,6 +27,6 @@ void main() async{
     debugShowCheckedModeBanner: false,
     //home:UserDetailPage(),
     //home:SplashScreen(),
-    home: LoginScreen(),
+    home: BottomTabScreen(),
   )));
 }

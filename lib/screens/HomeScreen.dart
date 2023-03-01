@@ -23,6 +23,10 @@ class _HomeScreenState extends State<HomeScreen> {
             StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance.collection("posts").snapshots(),
               builder: (context,snapshot){
+                if(snapshot.hasError){
+                  return Center(child:Text("Some Error Occured"));
+                }
+              if(snapshot.hasData){
               return Expanded(
                 child: ListView.builder(
                   itemCount: snapshot.data!.docs.length,
@@ -33,6 +37,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     post.fromObj(data as DocumentSnapshot<Map<String,dynamic>>);
                 return PostWidget(post);
               }));
+              }
+              return Center(child: CircularProgressIndicator(),);
               }
                 )
                 ]
