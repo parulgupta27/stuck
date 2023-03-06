@@ -65,7 +65,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 
                                   User user=User();  
                                   user.fromObj(snapshot.data!.docs[index] as DocumentSnapshot<Map<String,dynamic>> );
-                              return UserCard(user);
+                              return UserCard(user,(){Navigator.push(context, MaterialPageRoute(builder: (context)=>UserProfile(user)));});
                             }
                             else{
                               return SizedBox(height: 0,);

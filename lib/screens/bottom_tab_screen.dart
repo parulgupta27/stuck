@@ -5,6 +5,7 @@ import 'package:stuck/main.dart';
 import 'package:stuck/models/user_model.dart' as umd;
 import 'package:stuck/screens/HomeScreen.dart';
 import 'package:stuck/screens/add_post_screen.dart';
+import 'package:stuck/screens/chat_screen.dart';
 import 'package:stuck/screens/search_screen.dart';
 import 'package:stuck/screens/signed_user_profile.dart';
 import 'package:stuck/widgets/post_grid_view.dart';
@@ -46,6 +47,16 @@ setState(() {
     return DefaultTabController(
       length: 5,
       child: Scaffold(
+        appBar: AppBar
+        (backgroundColor: Colors.white,
+        elevation: 0.2,
+          title:Text("Stuck!",style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),),
+          centerTitle: false,
+          actions: [
+            IconButton(onPressed: (){
+              Navigator.push(context,MaterialPageRoute(builder: (context)=>ChatScreen(user)));
+            }, icon: Icon(Icons.message_outlined,color: Colors.black,)),
+          ]),
         body: SafeArea(
             child: PageView(
           physics: NeverScrollableScrollPhysics(),

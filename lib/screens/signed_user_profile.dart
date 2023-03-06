@@ -37,14 +37,7 @@ class _SignedUserProfileState extends State<SignedUserProfile> {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: width * 0.00),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          SizedBox(height: height*0.015,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              IconButton(onPressed: (){
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>BottomTabScreen()));
-              }, icon: Icon(Icons.arrow_back))
-            ],),
+          
           SizedBox(
             height: height * 0.01,
           ),
@@ -56,7 +49,7 @@ class _SignedUserProfileState extends State<SignedUserProfile> {
                   height: height * 0.09,
                   child: CircleAvatar(
                       radius: height * 0.045,
-                      backgroundImage: NetworkImage(user.url!)),
+                      backgroundImage: NetworkImage(user.url.toString())),
                 ),
                 SizedBox(
                   width: width * 0.05,
@@ -69,7 +62,7 @@ class _SignedUserProfileState extends State<SignedUserProfile> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        user.name!,
+                        user.name.toString(),
                         style: TextStyle(
                             fontSize: height * 0.022,
                             fontWeight: FontWeight.w500),
@@ -78,7 +71,7 @@ class _SignedUserProfileState extends State<SignedUserProfile> {
                         height: height * 0.003,
                       ),
                       Text(
-                        user.department!,
+                        user.department.toString(),
                         style: TextStyle(
                             color: Colors.grey,
                             fontSize: height * 0.014,
@@ -93,12 +86,12 @@ class _SignedUserProfileState extends State<SignedUserProfile> {
           SizedBox(
             height: height * 0.012,
           ),
-          (user.bio!="")?
+          (user.bio.toString()=="")?
           Padding(
             padding: EdgeInsets.symmetric(horizontal: width * 0.03),
             child: Container(
               child: Text(
-               user.bio!,
+               user.bio.toString(),
                 style: TextStyle(
                     fontSize: height * 0.015, fontWeight: FontWeight.w500),
               ),
