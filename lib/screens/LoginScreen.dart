@@ -69,8 +69,8 @@ Size screensize=Utils().getScreenSize();
                          SizedBox(
                            width: screensize.width*0.6,
                            child: RoundedButton(
-                             label:isLoading? CircularProgressIndicator(color: Colors.white,):Text("Login"),
-                             callback: ()async{
+                             isLoading? CircularProgressIndicator(color: Colors.white,):Text("Login"),
+                             ()async{
 
                                isLoading=true;
                                setState(() {
@@ -84,6 +84,7 @@ Size screensize=Utils().getScreenSize();
                                  isLoading=false;
                                });
                              },
+                             Colors.blue
                            ),
                          ),
                          TextButton(onPressed: (){
@@ -109,9 +110,9 @@ Size screensize=Utils().getScreenSize();
                  SizedBox(
                    width: screensize.width*0.6,
                      child: RoundedButton(
-                         label: Text(" Sign Up"), callback:(){
+                         Text(" Sign Up"), (){
                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignupScreen()));
-                         })),
+                         },Colors.blue)),
                  SizedBox(height: 20,),
 
 

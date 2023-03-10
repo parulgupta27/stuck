@@ -31,13 +31,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               width: screensize.width*0.8,
                 child: CustomTextField(emailController,"Enter Email", Icons.email_outlined, false)),
             SizedBox(height: 30,),
-            RoundedButton(label: Text("Forgot"), callback:(){
+            RoundedButton(Text("Forgot"),(){
               auth.sendPasswordResetEmail(email: emailController.text.toString()).then((value){
                 Utils().showSnackBar(context: context, content:"We Have sent an Email for Recover Your Password");
               }).onError((error, stackTrace) {
                 Utils().showSnackBar(context: context, content:error.toString());
               });
-            }),
+            },Colors.blue),
           ],
         ),
       ),

@@ -35,6 +35,6 @@ void main() async{
     debugShowCheckedModeBanner: false,
     //home:UserDetailPage(),
     //home:SplashScreen(),
-    home: LoginScreen(),
+    home: BottomTabScreen(),
   )));
 }

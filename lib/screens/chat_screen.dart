@@ -6,15 +6,16 @@ import 'package:stuck/models/user_model.dart';
 import 'package:stuck/screens/personal_chat_screen.dart';
 import 'package:stuck/widgets/user_card.dart';
 class ChatScreen extends StatefulWidget {
-  User user=User();
-  ChatScreen(this.user);
+
+  User currUser=User();
+  ChatScreen(this.currUser);
 
   @override
-  State<ChatScreen> createState() => _ChatScreenState(this.user);
+  State<ChatScreen> createState() => _ChatScreenState(this.currUser,);
 }
 class _ChatScreenState extends State<ChatScreen> {
-  User user=User();
-  _ChatScreenState(this.user);
+  User currUser=User();
+  _ChatScreenState(this.currUser);
   @override
   Widget build(BuildContext context) {
     Size size=MediaQuery.of(context).size;
@@ -36,7 +37,7 @@ class _ChatScreenState extends State<ChatScreen> {
           radius: height*0.019,
           child: CircleAvatar(backgroundColor: Colors.white,
           radius: height*0.017,
-          backgroundImage: NetworkImage(user.url!),
+          backgroundImage: NetworkImage(currUser.url!),
           ),
         ),
         ),
@@ -46,7 +47,7 @@ class _ChatScreenState extends State<ChatScreen> {
           padding: EdgeInsets.symmetric(horizontal: width*0.01),
           child: Column(children: [
             StreamBuilder(
-              stream: FirebaseFirestore.instance.collection("students").doc(user.email).collection("chats").snapshots(),
+              stream: FirebaseFirestore.instance.collection("students").doc(currUser.email).collection("chats").snapshots(),
               builder: (context,snapshot){
                 if(snapshot.hasData)
               return Expanded(child: ListView.builder(
@@ -56,12 +57,14 @@ class _ChatScreenState extends State<ChatScreen> {
                 return StreamBuilder(
                   stream: FirebaseFirestore.instance.collection("students").doc(email).snapshots(),
                   builder: (context,snap){
+                    if(snap.hasData){
                  User user=User();
                      var vari=snap.data;
                      user.fromObj(vari!);
                      return UserCard(user, () {
-                       Navigator.push(context, MaterialPageRoute(builder: (context)=>PersonalChatScreen(user)));
-                     });
+                       Navigator.push(context, MaterialPageRoute(builder: (context)=>PersonalChatScreen(user,currUser)));
+                     });}
+                     return Center(child: CircularProgressIndicator());
                 });
               })
               );

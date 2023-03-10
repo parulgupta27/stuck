@@ -45,7 +45,11 @@ class Storage {
         course: course,
         gender: gender,
         phoneNo: phoneNo,
-        year: year);
+        year: year,
+        connections: [],
+        requests: [],
+        requested: []
+        );
     try {
       var ref = await _firestore
           .collection("Kurukshetra University")

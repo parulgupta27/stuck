@@ -22,20 +22,22 @@ class _SearchBarState extends State<SearchBar> {
     height = size.height;
     width = size.width;
     return 
-TextField(
-  controller: controller,
-  onChanged: (value){
-    provider.setVal(value);
-  },
-              decoration: InputDecoration(
-                
-                icon: Icon(Icons.search),
-                fillColor: Colors.grey,
-                  hintText: "Search",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(height * 0.01),
-                  )),
-          
-          );
+SizedBox(
+  height: height*0.07,
+  child:   TextField(
+    controller: controller,
+    onChanged: (value){
+      provider.setVal(value);
+    },
+                decoration: InputDecoration(
+                  suffixIcon: Icon(Icons.search),
+                  fillColor: Colors.grey,
+                    hintText: "Search",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(height * 0.01),
+                    )),
+            
+            ),
+);
   }
 }

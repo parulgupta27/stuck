@@ -47,24 +47,15 @@ setState(() {
     return DefaultTabController(
       length: 5,
       child: Scaffold(
-        appBar: AppBar
-        (backgroundColor: Colors.white,
-        elevation: 0.2,
-          title:Text("Stuck!",style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),),
-          centerTitle: false,
-          actions: [
-            IconButton(onPressed: (){
-              Navigator.push(context,MaterialPageRoute(builder: (context)=>ChatScreen(user)));
-            }, icon: Icon(Icons.message_outlined,color: Colors.black,)),
-          ]),
+        
         body: SafeArea(
             child: PageView(
           physics: NeverScrollableScrollPhysics(),
           allowImplicitScrolling: false,
           controller: controller,
           children: [
-            HomeScreen(),
-            SearchScreen(),
+            HomeScreen(user),
+            SearchScreen(user),
             AddPostScreen(user),
             Scaffold(body: Center(child: Text("Notifictions")),),
             SignedUserProfile(user),

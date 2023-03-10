@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stuck/main.dart';
 import 'package:stuck/models/user_model.dart';
 import 'package:stuck/providers/search_provider.dart';
+import 'package:stuck/screens/signed_user_profile.dart';
 import 'package:stuck/screens/user_profile.dart';
 import 'package:stuck/utils/storage_method.dart';
 import 'package:stuck/widgets/search_bar.dart';
@@ -10,13 +11,16 @@ import 'package:stuck/widgets/user_card.dart';
 import 'package:provider/provider.dart';
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key});
+  User user;
+  SearchScreen(this.user);
 
   @override
-  State<SearchScreen> createState() => _SearchScreenState();
+  State<SearchScreen> createState() => _SearchScreenState(this.user);
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  User currUser;
+  _SearchScreenState(this.currUser);
   @override
   var controller = TextEditingController();
   void initState() {
@@ -36,14 +40,14 @@ class _SearchScreenState extends State<SearchScreen> {
         body: Column(
           children: [
             SizedBox(
-              height: height * 0.006,
+              height: height * 0.015,
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: width * 0.05),
               child: SearchBar(controller, provider),
             ),
             SizedBox(
-              height: height * 0.02,
+              height: height * 0.005,
             ),
             StreamBuilder<QuerySnapshot>(
               stream: _firestore
@@ -65,7 +69,11 @@ class _SearchScreenState extends State<SearchScreen> {
                                 
                                   User user=User();  
                                   user.fromObj(snapshot.data!.docs[index] as DocumentSnapshot<Map<String,dynamic>> );
-                              return UserCard(user,(){Navigator.push(context, MaterialPageRoute(builder: (context)=>UserProfile(user)));});
+                              return UserCard(user,(){
+                                if(user.email!=currUser.email)
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>UserProfile(user,currUser)));
+                                else Navigator.push(context, MaterialPageRoute(builder: (context)=>SignedUserProfile(currUser)));
+                                });
                             }
                             else{
                               return SizedBox(height: 0,);

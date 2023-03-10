@@ -10,12 +10,13 @@ import 'package:stuck/utils/Utils.dart';
 import 'package:stuck/utils/storage_method.dart';
 class PostWidget extends StatefulWidget {
   PostModel post;
-  PostWidget(this.post);
+  umd.User currUser;
+  PostWidget(this.post,this.currUser);
 
   @override
-  State<PostWidget> createState() => _PostWidgetState(this.post);
+  State<PostWidget> createState() => _PostWidgetState(this.post,this.currUser);
 }
-navigateToUserProfile(String email,BuildContext context)async{
+navigateToUserProfile(String email,BuildContext context,umd.User currUser)async{
 var _auth=FirebaseAuth.instance;
 var ref=await FirebaseFirestore.instance.collection("students").doc(email).get();
 umd.User user=umd.User();
@@ -24,13 +25,15 @@ if(email==_auth.currentUser!.email){
 Navigator.push(context, MaterialPageRoute(builder: (context)=>SignedUserProfile(user)));
 }
 else{
-  Navigator.push(context, MaterialPageRoute(builder: (context)=>UserProfile(user)));
+  Navigator.push(context, MaterialPageRoute(builder: (context)=>UserProfile(user,currUser)));
 }
 }
 
 class _PostWidgetState extends State<PostWidget> {
    PostModel post;
-   _PostWidgetState(this.post);
+
+   umd.User currUser;
+   _PostWidgetState(this.post,this.currUser);
   @override
   Widget build(BuildContext context) {
     Size size=MediaQuery.of(context).size;
@@ -42,7 +45,7 @@ class _PostWidgetState extends State<PostWidget> {
                     SizedBox(
                       child: ListTile(
                         onTap: (){
-                          navigateToUserProfile(post.email!, context);
+                          navigateToUserProfile(post.email!, context,currUser);
                         },
                        leading:CircleAvatar(
                          child: CircleAvatar(

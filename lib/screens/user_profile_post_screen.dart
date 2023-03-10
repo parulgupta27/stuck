@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stuck/custom_user.dart';
 import 'package:stuck/main.dart';
 import 'package:stuck/models/post_model.dart';
 import 'package:stuck/widgets/PostWidget.dart';
@@ -32,7 +33,7 @@ class _UserProfilePostScreenState extends State<UserProfilePostScreen> {
         child: Column(
         
           children: [
-        PostWidget(post),
+        PostWidget(post,user),
         SizedBox(height: height*0.01,),
         SizedBox(
           width: width*0.95,

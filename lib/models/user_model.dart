@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 class User {
   String? bio;
   String? url;
@@ -11,6 +12,9 @@ class User {
   String? year;
   String? gender;
   String? phoneNo;
+  List<dynamic>?connections;
+  List<dynamic>?requested;
+  List<dynamic>?requests;
   User(
       {this.bio,
          this.url,
@@ -22,7 +26,7 @@ class User {
       this.course,
       this.gender,
        this.phoneNo,
-      this.year});
+      this.year,this.connections,this.requested,this.requests});
   toObj() {
     return {
       "name": name,
@@ -35,7 +39,10 @@ class User {
       "year": year,
       "gender": gender,
       "phoneNo": phoneNo,
-      "bio":bio
+      "bio":bio,
+      "connections":connections,
+      "requests":requests,
+      "requested":[],
     };
   }
   fromObj(DocumentSnapshot<Map<String,dynamic>>user){
@@ -50,5 +57,8 @@ class User {
   year=user.get("year");
   gender=user.get("gender");
   phoneNo=user.get("phoneNo");
+  connections=user.get("connections");
+  requests=user.get("requests");
+  requested=user.get("requested");
   }
 }
